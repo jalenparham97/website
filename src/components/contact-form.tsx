@@ -1,5 +1,7 @@
 "use client";
 
+import { MailSend01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -58,9 +60,16 @@ export function ContactForm() {
             className="min-h-32 rounded-none"
           />
         </Field>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <Button type="submit" size="lg" className="rounded-none">
-            Send message
+        <div className="flex flex-col gap-3 pt-2">
+          <Button
+            type="submit"
+            size="lg"
+            className="group flex h-13 w-full items-center justify-center gap-2.5 rounded-none bg-foreground text-base font-medium text-background transition-all duration-300 hover:bg-foreground/90"
+          >
+            <span>Send message</span>
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              <HugeiconsIcon icon={MailSend01Icon} size={18} strokeWidth={1.5} />
+            </span>
           </Button>
         </div>
       </FieldGroup>

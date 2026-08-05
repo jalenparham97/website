@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 export function SiteHeader() {
@@ -28,26 +29,26 @@ export function SiteHeader() {
       aria-label="Main navigation"
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
-        <a
+        <Link
           href="/"
           className="inline-flex bg-black px-3 py-2 font-mono text-lg font-semibold tracking-[-0.02em] text-white"
           aria-label="Jalen Parham home"
         >
           JP
-        </a>
+        </Link>
         <div className="hidden items-center gap-5 text-base text-muted-foreground md:flex md:gap-7">
-          <a className="transition-colors hover:text-foreground" href="/about">
+          <Link className="transition-colors hover:text-foreground" href="/about">
             About
-          </a>
-          <a className="transition-colors hover:text-foreground" href="/#services">
+          </Link>
+          <Link className="transition-colors hover:text-foreground" href="/services">
             Services
-          </a>
-          <a className="transition-colors hover:text-foreground" href="/#portfolio">
+          </Link>
+          <Link className="transition-colors hover:text-foreground" href="/#portfolio">
             My work
-          </a>
-          <a className="transition-colors hover:text-foreground" href="/#contact">
+          </Link>
+          <Link className="transition-colors hover:text-foreground" href="/#contact">
             Contact
-          </a>
+          </Link>
         </div>
         <Popover open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <PopoverTrigger
@@ -76,34 +77,34 @@ export function SiteHeader() {
             className="w-[calc(100vw-2.5rem)] max-w-none gap-0 rounded-none border-border/60 border-t-0 bg-background p-0 text-lg text-muted-foreground shadow-none ring-0 sm:w-[calc(100vw-4rem)]"
           >
             <div className="flex flex-col">
-              <a
+              <Link
                 className="border-b border-border/60 px-5 py-4 transition-colors hover:text-foreground sm:px-8"
                 href="/about"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
-              </a>
-              <a
+              </Link>
+              <Link
                 className="border-b border-border/60 px-5 py-4 transition-colors hover:text-foreground sm:px-8"
-                href="/#services"
+                href="/services"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Services
-              </a>
-              <a
+              </Link>
+              <Link
                 className="border-b border-border/60 px-5 py-4 transition-colors hover:text-foreground sm:px-8"
                 href="/#portfolio"
                 onClick={() => setIsMenuOpen(false)}
               >
                 My work
-              </a>
-              <a
+              </Link>
+              <Link
                 className="px-5 py-4 transition-colors hover:text-foreground sm:px-8"
                 href="/#contact"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
-              </a>
+              </Link>
             </div>
           </PopoverContent>
         </Popover>

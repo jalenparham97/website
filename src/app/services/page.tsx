@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { AboutStory } from "@/components/pages/about/about-story";
+import { ServicesPage } from "@/components/pages/services/services-page";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  title: "About | Jalen Parham",
+  title: "Services | Jalen Parham",
   description:
-    "Learn about Jalen Parham's background in software engineering, design philosophy, and direct client collaboration.",
+    "Web design, website development, and content management for small businesses and independent people.",
 };
 
-export default function AboutPage() {
+export default function ServicesRoute() {
   return (
     <main id="top" className="min-h-svh overflow-x-clip">
       <SiteHeader />
 
       <div className="mx-auto flex w-full max-w-7xl flex-col px-5 pb-16 sm:px-8 lg:px-12">
-        <AboutStory />
+        <ServicesPage />
         <SiteFooter />
       </div>
     </main>

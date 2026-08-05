@@ -21,7 +21,7 @@ Jalen's site should feel like a polished independent practice: confident composi
 1. Sticky frosted navigation with About, Services, Portfolio, and Contact.
 2. Left-aligned hero with role, personable intro, and CTAs.
 3. About: split layout with personal greeting and short bio.
-4. Services: stacked editorial rows for design, development, and content management.
+4. Services page: short offer summary, compact service list (no numbering), and three package cards with starting prices.
 5. Portfolio: two project cards for Formbox and Beyond Births.
 6. Contact: invitation copy plus name/email/message form.
 7. Footer: identity, tagline, and copyright.

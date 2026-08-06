@@ -87,7 +87,7 @@ export function ServicesPage() {
           </a>
           <Link
             href="/contact"
-            className="group inline-flex w-full items-center justify-center gap-2 border border-border bg-background px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:border-foreground/30 sm:py-3"
+            className="group inline-flex w-full items-center justify-center gap-2 border border-border bg-muted px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:border-foreground/30 dark:hover:bg-muted/80 sm:py-3"
           >
             Start a project
             <HugeiconsIcon
@@ -228,7 +228,7 @@ export function ServicesPage() {
                 className={`group mt-6 inline-flex w-full items-center justify-center gap-2 border px-4 py-3.5 text-base font-medium transition-colors sm:mt-8 sm:py-3 ${
                   pkg.featured
                     ? "border-background bg-background text-foreground hover:bg-background/90"
-                    : "border-border bg-background text-foreground hover:border-foreground/30"
+                    : "border-border bg-muted text-foreground hover:border-foreground/30 dark:hover:bg-muted/80"
                 }`}
               >
                 Inquire

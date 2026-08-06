@@ -37,7 +37,7 @@ export function ContactPage() {
           aria-labelledby="email-path-heading"
           className="border border-border bg-card p-6 sm:p-8 lg:p-10"
         >
-          <div className="inline-flex size-10 shrink-0 items-center justify-center border border-border bg-background text-foreground">
+          <div className="inline-flex size-10 shrink-0 items-center justify-center border border-border bg-background text-foreground dark:bg-muted">
             <HugeiconsIcon icon={Mail01Icon} size={18} strokeWidth={1.7} />
           </div>
 
@@ -70,7 +70,7 @@ export function ContactPage() {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="inline-flex flex-1 items-center justify-center gap-2 border border-border bg-background px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:border-foreground/30 sm:py-3"
+                className="inline-flex flex-1 items-center justify-center gap-2 border border-border bg-muted px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:border-foreground/30 dark:hover:bg-muted/80 sm:py-3"
               >
                 {copied ? (
                   <>
@@ -92,7 +92,7 @@ export function ContactPage() {
           aria-labelledby="form-path-heading"
           className="border border-border bg-card p-6 sm:p-8 lg:p-10"
         >
-          <div className="inline-flex size-10 shrink-0 items-center justify-center border border-border bg-background text-foreground">
+          <div className="inline-flex size-10 shrink-0 items-center justify-center border border-border bg-background text-foreground dark:bg-muted">
             <HugeiconsIcon icon={BubbleChatIcon} size={18} strokeWidth={1.7} />
           </div>
 

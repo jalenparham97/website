@@ -50,8 +50,8 @@ export function SiteFooter() {
         {/* Left Column: Brand Identity & Tagline */}
         <div className="flex flex-col gap-3.5">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex bg-black px-3 py-2.5 font-mono text-sm font-semibold tracking-tight text-white">
-              JP
+            <span className="inline-flex size-11 overflow-hidden border border-border bg-background">
+              <img src="/me.png" alt="Jalen Parham" className="size-full object-cover" />
             </span>
             <span className="font-mono text-base font-medium text-foreground">Jalen Parham</span>
             <span className="font-mono text-sm text-muted-foreground">
@@ -76,9 +76,9 @@ export function SiteFooter() {
                   rel="noopener noreferrer"
                   aria-label={social.name}
                   title={social.name}
-                  className="group flex size-9 items-center justify-center border border-border bg-card text-muted-foreground transition-all duration-200 hover:border-foreground hover:bg-foreground hover:text-background"
+                  className="group flex size-10 items-center justify-center border border-border bg-card text-muted-foreground transition-all duration-200 hover:border-foreground hover:bg-foreground hover:text-background"
                 >
-                  <Icon className="size-4 transition-colors group-hover:text-background" />
+                  <Icon className="size-4.5 transition-colors group-hover:text-background" />
                 </a>
               );
             })}

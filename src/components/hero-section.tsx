@@ -22,11 +22,12 @@ export function HeroSection() {
           </div>
 
           {/* Action Row */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          <div className="flex flex-col items-stretch gap-4 pt-2 sm:flex-row sm:items-center">
             <Link
               className={buttonVariants({
                 size: "lg",
-                className: "group gap-2.5 rounded-none px-7 text-base font-medium",
+                className:
+                  "group h-auto! w-full gap-2.5 rounded-none px-7 py-3.5 text-base font-medium sm:w-auto sm:py-3",
               })}
               href="/contact"
             >
@@ -36,11 +37,7 @@ export function HeroSection() {
               </span>
             </Link>
             <Link
-              className={buttonVariants({
-                variant: "outline",
-                size: "lg",
-                className: "group gap-2.5 rounded-none px-7 text-base font-medium",
-              })}
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-none border border-border bg-muted px-5 py-3.5 text-sm font-medium text-foreground transition-colors hover:border-foreground/30 dark:hover:bg-muted/80 sm:w-auto sm:py-3"
               href="/work"
             >
               <span>View my work</span>

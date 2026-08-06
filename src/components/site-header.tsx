@@ -1,8 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteHeader() {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -31,10 +39,16 @@ export function SiteHeader() {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link
           href="/"
-          className="inline-flex bg-black px-3 py-2 font-mono text-lg font-semibold tracking-[-0.02em] text-white"
+          className="inline-flex size-11 overflow-hidden border border-border bg-background"
           aria-label="Jalen Parham home"
         >
-          JP
+          <Image
+            src="/me.png"
+            alt="Jalen Parham"
+            width={44}
+            height={44}
+            className="size-full object-cover"
+          />
         </Link>
         <div className="hidden items-center gap-5 text-base text-muted-foreground md:flex md:gap-7">
           <Link className="transition-colors hover:text-foreground" href="/about">
@@ -49,9 +63,10 @@ export function SiteHeader() {
           <Link className="transition-colors hover:text-foreground" href="/contact">
             Contact
           </Link>
+          <ThemeToggle />
         </div>
-        <Popover open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-          <PopoverTrigger
+        <Drawer open={isMenuOpen} onOpenChange={setIsMenuOpen} swipeDirection="right">
+          <DrawerTrigger
             className="relative inline-flex size-11 items-center justify-center border border-border text-foreground md:hidden"
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           >
@@ -70,44 +85,62 @@ export function SiteHeader() {
                 isMenuOpen ? "-rotate-45" : "translate-y-1.5"
               }`}
             />
-          </PopoverTrigger>
-          <PopoverContent
-            align="end"
-            sideOffset={0}
-            className="w-[calc(100vw-2.5rem)] max-w-none gap-0 rounded-none border-border/60 border-t-0 bg-background p-0 text-lg text-muted-foreground shadow-none ring-0 sm:w-[calc(100vw-4rem)]"
-          >
-            <div className="flex flex-col">
+          </DrawerTrigger>
+          <DrawerContent className="h-[calc(100dvh-1rem)] w-[min(88vw,26rem)] rounded-none border-y-0 border-r-0 border-l border-border bg-background p-5 text-lg text-muted-foreground shadow-2xl sm:p-8">
+            <DrawerTitle className="sr-only">Mobile navigation</DrawerTitle>
+            <div className="flex items-center justify-between border-b border-border pb-5">
+              <span className="inline-flex size-11 overflow-hidden border border-border bg-background">
+                <Image
+                  src="/me.png"
+                  alt="Jalen Parham"
+                  width={44}
+                  height={44}
+                  className="size-full object-cover"
+                />
+              </span>
+              <DrawerClose
+                className="relative inline-flex size-11 items-center justify-center border border-border text-foreground transition-colors hover:bg-muted"
+                aria-label="Close navigation menu"
+              >
+                <span className="absolute h-px w-5 rotate-45 bg-current" />
+                <span className="absolute h-px w-5 -rotate-45 bg-current" />
+              </DrawerClose>
+            </div>
+            <div className="flex flex-1 flex-col pt-5">
               <Link
-                className="border-b border-border/60 px-5 py-4 transition-colors hover:text-foreground sm:px-8"
+                className="border-b border-border/60 py-5 transition-colors hover:text-foreground"
                 href="/about"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link
-                className="border-b border-border/60 px-5 py-4 transition-colors hover:text-foreground sm:px-8"
+                className="border-b border-border/60 py-5 transition-colors hover:text-foreground"
                 href="/services"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Services
               </Link>
               <Link
-                className="border-b border-border/60 px-5 py-4 transition-colors hover:text-foreground sm:px-8"
+                className="border-b border-border/60 py-5 transition-colors hover:text-foreground"
                 href="/work"
                 onClick={() => setIsMenuOpen(false)}
               >
                 My work
               </Link>
               <Link
-                className="px-5 py-4 transition-colors hover:text-foreground sm:px-8"
+                className="border-b border-border/60 py-5 transition-colors hover:text-foreground"
                 href="/contact"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
+              <div className="mt-auto pt-8">
+                <ThemeToggle showLabel />
+              </div>
             </div>
-          </PopoverContent>
-        </Popover>
+          </DrawerContent>
+        </Drawer>
       </div>
     </nav>
   );

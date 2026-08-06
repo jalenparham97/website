@@ -145,7 +145,7 @@ export function ServicesPage() {
                 className={`mt-8 inline-flex items-center justify-center gap-2 border px-4 py-2.5 text-sm font-medium transition-colors ${
                   pkg.featured
                     ? "border-background bg-background text-foreground hover:bg-background/90"
-                    : "border-border bg-background text-foreground hover:border-foreground/30"
+                    : "border-border bg-muted text-foreground hover:border-foreground/30 dark:hover:bg-muted/80"
                 }`}
               >
                 Inquire

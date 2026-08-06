@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { buttonVariants } from "@/components/ui/button";
 
 const principles = [
   {
@@ -57,6 +59,20 @@ export function AboutSection() {
               ideas into a clear, polished online experience.
             </p>
           </div>
+
+          <Link
+            href="/about"
+            className={buttonVariants({
+              size: "lg",
+              className:
+                "group mt-2 w-full gap-2.5 rounded-none px-7 text-base font-medium sm:w-auto",
+            })}
+          >
+            <span>More about me</span>
+            <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
+              <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.5} />
+            </span>
+          </Link>
         </div>
 
         {/* Right Column: Interactive Craft Philosophy */}

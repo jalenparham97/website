@@ -3,6 +3,7 @@ import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ProjectCard } from "@/components/project-card";
 import { featuredProjects } from "@/lib/projects";
+import { buttonVariants } from "@/components/ui/button";
 
 export function PortfolioSection() {
   return (
@@ -19,15 +20,16 @@ export function PortfolioSection() {
         </div>
         <Link
           href="/work"
-          className="group inline-flex shrink-0 items-center gap-2 text-base font-medium text-foreground underline decoration-border underline-offset-8 transition-colors hover:decoration-foreground"
+          className={buttonVariants({
+            size: "lg",
+            className:
+              "group w-full shrink-0 gap-2.5 rounded-none px-7 text-base font-medium sm:w-auto",
+          })}
         >
-          View all work
-          <HugeiconsIcon
-            icon={ArrowUpRight01Icon}
-            size={18}
-            strokeWidth={1.8}
-            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none"
-          />
+          <span>View all work</span>
+          <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 motion-reduce:transform-none">
+            <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.5} />
+          </span>
         </Link>
       </div>
 

@@ -12,6 +12,8 @@
 
 - When asked to create a plan put the plan file in the .github/plans directory. Give it a date and time last updated in the front matter.
 
+- When writing copy for the app or website, never use em dashes. Always write in plain English. Avoid using fancy words or phrases. Keep it simple and clear.
+
 ## TypeScript
 
 - Don't unnecessarily add 'try / catch' - Don't cast to 'any'

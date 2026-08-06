@@ -39,7 +39,7 @@ export function AboutStory() {
           </p>
         </div>
         <Link
-          href="/#contact"
+          href="/contact"
           className="group mt-8 inline-flex items-center gap-2 text-base font-medium text-foreground underline decoration-border underline-offset-8 transition-colors hover:decoration-foreground sm:mt-0 sm:shrink-0"
         >
           Get in touch

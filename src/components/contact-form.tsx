@@ -56,7 +56,7 @@ export function ContactForm() {
             name="message"
             required
             rows={5}
-            placeholder="Tell me a little about your project..."
+            placeholder="General question, new project, or anything else..."
             className="min-h-32 rounded-none"
           />
         </Field>

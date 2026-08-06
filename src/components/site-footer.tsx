@@ -45,7 +45,7 @@ export function SiteFooter() {
   }
 
   return (
-    <footer className="mt-28 border-t border-border pt-16 pb-20 sm:mt-36 sm:pt-20 sm:pb-24">
+    <footer className="border-t border-border pt-16 pb-20 sm:pt-20 sm:pb-24">
       <div className="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
         {/* Left Column: Brand Identity & Tagline */}
         <div className="flex flex-col gap-3.5">

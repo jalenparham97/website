@@ -54,7 +54,7 @@ export function ContactSection() {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="inline-flex flex-1 items-center justify-center gap-2 border border-border bg-background px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:border-foreground/30 sm:py-3"
+                className="inline-flex flex-1 items-center justify-center gap-2 border border-border bg-muted px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:border-foreground/30 dark:hover:bg-muted/80 sm:py-3"
               >
                 {copied ? (
                   <>

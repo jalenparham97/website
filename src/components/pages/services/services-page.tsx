@@ -66,7 +66,7 @@ const packages = [
 
 export function ServicesPage() {
   return (
-    <div className="mx-auto max-w-5xl py-10 sm:py-16 lg:py-24">
+    <div className="mx-auto max-w-5xl py-14 sm:py-20 lg:py-24">
       <header className="grid gap-8 border-b border-border pb-10 sm:gap-10 sm:pb-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:items-end lg:gap-16 lg:pb-14">
         <div className="min-w-0">
           <h1 className="max-w-3xl text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.035em] text-foreground sm:text-5xl sm:leading-[1.06] sm:tracking-[-0.04em] lg:text-[3.75rem] lg:leading-[1.05]">

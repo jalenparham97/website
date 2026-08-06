@@ -21,7 +21,7 @@ export function ContactPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl py-6 sm:py-10 lg:py-12">
+    <div className="mx-auto max-w-5xl py-14 sm:py-20 lg:py-24">
       <header className="pb-6">
         <h1 className="max-w-3xl text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.035em] text-foreground sm:text-5xl sm:leading-[1.06] sm:tracking-[-0.04em] lg:text-[3.5rem] lg:leading-[1.05]">
           Let&apos;s get in touch.

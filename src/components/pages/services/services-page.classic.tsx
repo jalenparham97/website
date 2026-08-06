@@ -180,7 +180,7 @@ export function ServicesPage() {
           href="/contact"
           className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-foreground underline decoration-border underline-offset-8 transition-colors hover:decoration-foreground sm:mt-0 sm:shrink-0"
         >
-          Get in touch
+          Discuss your project
           <HugeiconsIcon
             icon={ArrowUpRight01Icon}
             size={16}

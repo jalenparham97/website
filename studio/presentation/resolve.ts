@@ -1,4 +1,8 @@
-import { defineDocuments, defineLocations, type PresentationPluginOptions } from "sanity/presentation";
+import {
+  defineDocuments,
+  defineLocations,
+  type PresentationPluginOptions,
+} from "sanity/presentation";
 
 export const resolve: PresentationPluginOptions["resolve"] = {
   mainDocuments: defineDocuments([

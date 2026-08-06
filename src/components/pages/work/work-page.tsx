@@ -48,7 +48,7 @@ export function WorkPage() {
           href="/contact"
           className="group mt-8 inline-flex items-center gap-2 text-base font-medium text-foreground underline decoration-border underline-offset-8 transition-colors hover:decoration-foreground sm:mt-0 sm:shrink-0"
         >
-          Get in touch
+          Let&apos;s talk about your project
           <HugeiconsIcon
             icon={ArrowUpRight01Icon}
             size={18}

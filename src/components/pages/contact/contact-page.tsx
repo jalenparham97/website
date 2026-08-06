@@ -51,15 +51,15 @@ export function ContactPage() {
             Prefer your own inbox? Write me directly. I read every message and reply personally.
           </p>
 
-          <div className="mt-6 border-t border-border pt-6 sm:mt-8 sm:pt-8">
+          <div className="border-t border-border pt-6 sm:mt-8">
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="break-all text-lg font-medium tracking-[-0.02em] text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground sm:text-xl"
+              className="text-base font-medium text-foreground transition-opacity hover:opacity-75 sm:text-lg"
             >
               {CONTACT_EMAIL}
             </a>
 
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="inline-flex flex-1 items-center justify-center gap-2 border border-foreground bg-foreground px-5 py-3.5 text-base font-medium text-background transition-colors hover:bg-foreground/90 sm:py-3"
@@ -104,7 +104,7 @@ export function ContactPage() {
           </h2>
           <p className="mt-3 max-w-md text-base leading-7 text-muted-foreground sm:leading-8">
             Tell me a little about your website project or idea, and what you&apos;d like help with.
-            I usually reply fast, and at the latest, within 24 hours.
+            I usually reply within 24 hours.
           </p>
 
           <div className="mt-6 border-t border-border pt-6 sm:mt-8 sm:pt-8">

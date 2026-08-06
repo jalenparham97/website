@@ -27,7 +27,7 @@ export function ProjectCard({ project, featured = false, className }: ProjectCar
       rel="noreferrer"
       aria-label={`${project.name} — visit live website`}
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden border border-border bg-card text-left transition-[border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/25 hover:shadow-[0_18px_40px_-28px_rgba(0,0,0,0.45)] motion-reduce:transform-none motion-reduce:transition-none",
+        "group relative flex h-full flex-col overflow-hidden border border-border bg-card text-left transition-[border-color] duration-300 ease-out hover:border-foreground/25 motion-reduce:transition-none",
         className,
       )}
     >

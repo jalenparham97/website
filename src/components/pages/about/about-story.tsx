@@ -31,18 +31,18 @@ export function AboutStory() {
       <footer className="mx-auto mt-20 max-w-3xl border-t border-border pt-10 sm:mt-24 sm:flex sm:items-end sm:justify-between sm:gap-12 sm:pt-12">
         <div className="max-w-xl">
           <h2 className="text-balance text-3xl font-medium leading-tight tracking-[-0.03em] text-foreground sm:text-4xl">
-            Want to talk about your project?
+            Have a question or just want to say hello?
           </h2>
           <p className="mt-4 text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-            Tell me what you&apos;re building, what you need help with, and where you&apos;d like to
-            take it.
+            I&apos;d be happy to hear from you, whether you have an idea in mind or just want to
+            start a conversation.
           </p>
         </div>
         <Link
           href="/contact"
           className="group mt-8 inline-flex items-center gap-2 text-base font-medium text-foreground underline decoration-border underline-offset-8 transition-colors hover:decoration-foreground sm:mt-0 sm:shrink-0"
         >
-          Get in touch
+          Say hello
           <HugeiconsIcon
             icon={ArrowUpRight01Icon}
             size={18}

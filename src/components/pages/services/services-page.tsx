@@ -87,10 +87,15 @@ export function ServicesPage() {
           </a>
           <Link
             href="/contact"
-            className="inline-flex w-full items-center justify-center gap-2 border border-border bg-background px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:border-foreground/30 sm:py-3"
+            className="group inline-flex w-full items-center justify-center gap-2 border border-border bg-background px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:border-foreground/30 sm:py-3"
           >
-            Get in touch
-            <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.8} />
+            Start a project
+            <HugeiconsIcon
+              icon={ArrowUpRight01Icon}
+              size={18}
+              strokeWidth={1.8}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </Link>
         </div>
       </header>
@@ -220,14 +225,19 @@ export function ServicesPage() {
 
               <Link
                 href="/contact"
-                className={`mt-6 inline-flex w-full items-center justify-center gap-2 border px-4 py-3.5 text-base font-medium transition-colors sm:mt-8 sm:py-3 ${
+                className={`group mt-6 inline-flex w-full items-center justify-center gap-2 border px-4 py-3.5 text-base font-medium transition-colors sm:mt-8 sm:py-3 ${
                   pkg.featured
                     ? "border-background bg-background text-foreground hover:bg-background/90"
                     : "border-border bg-background text-foreground hover:border-foreground/30"
                 }`}
               >
                 Inquire
-                <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.8} />
+                <HugeiconsIcon
+                  icon={ArrowUpRight01Icon}
+                  size={18}
+                  strokeWidth={1.8}
+                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
               </Link>
             </article>
           ))}
@@ -258,7 +268,7 @@ export function ServicesPage() {
           href="/contact"
           className="group mt-6 inline-flex w-full items-center justify-center gap-2 border border-background bg-background px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-background/90 sm:mt-0 sm:w-auto sm:shrink-0 sm:py-3"
         >
-          Get in touch
+          Discuss your project
           <HugeiconsIcon
             icon={ArrowUpRight01Icon}
             size={18}

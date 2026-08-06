@@ -4,7 +4,7 @@ import { ContactPage } from "@/components/pages/contact/contact-page";
 export const metadata: Metadata = {
   title: "Contact | Jalen Parham",
   description:
-    "Get in touch with Jalen Parham about web design, website development, or your next project.",
+    "Talk with Jalen Parham about web design, website development, or your next project.",
 };
 
 export default function ContactRoute() {

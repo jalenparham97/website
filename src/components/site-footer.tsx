@@ -2,6 +2,7 @@
 
 import { ArrowUp01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { useEffect, useState } from "react";
 
 interface SocialLink {
   name: string;
@@ -40,6 +41,12 @@ const socialLinks: SocialLink[] = [
 ];
 
 export function SiteFooter() {
+  const [year, setYear] = useState<number>();
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -54,9 +61,7 @@ export function SiteFooter() {
               <img src="/me.png" alt="Jalen Parham" className="size-full object-cover" />
             </span>
             <span className="font-mono text-base font-medium text-foreground">Jalen Parham</span>
-            <span className="font-mono text-sm text-muted-foreground">
-              © {new Date().getFullYear()}
-            </span>
+            <span className="font-mono text-sm text-muted-foreground">© {year}</span>
           </div>
           <p className="max-w-lg text-base text-muted-foreground leading-relaxed">
             Living, learning, and leveling up one day at a time.

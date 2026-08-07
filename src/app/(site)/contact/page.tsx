@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { CONTACT_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
+  "use cache";
   const { data } = await sanityFetch({ query: CONTACT_PAGE_QUERY, stega: false });
 
   return {
@@ -14,6 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactRoute() {
+  "use cache";
   const { data } = await sanityFetch({ query: CONTACT_PAGE_QUERY });
 
   return (

@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { draftMode } from "next/headers";
-import { VisualEditing } from "next-sanity/visual-editing";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,7 +18,7 @@ export const metadata: Metadata = {
   description: "Jalen Parham helps small businesses turn good ideas into clear, capable websites.",
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
@@ -37,8 +34,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         >
           {children}
         </ThemeProvider>
-        <SanityLive />
-        {(await draftMode()).isEnabled && <VisualEditing />}
       </body>
     </html>
   );

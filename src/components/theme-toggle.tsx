@@ -22,8 +22,10 @@ export function ThemeToggle({ showLabel = false }: { showLabel?: boolean }) {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
-        "inline-flex items-center justify-center gap-2 border border-border text-sm text-foreground transition-colors hover:bg-muted",
-        showLabel ? "w-full px-5 py-4 sm:px-8" : "size-8",
+        "inline-flex items-center justify-center gap-2 border border-border text-sm text-foreground transition-colors",
+        showLabel
+          ? "w-full bg-muted px-5 py-4 hover:border-foreground/30 dark:hover:bg-muted/80 sm:px-8"
+          : "size-8 bg-muted hover:border-foreground/30 dark:hover:bg-muted/80",
       )}
       aria-label={label}
     >

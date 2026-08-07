@@ -1,20 +1,13 @@
 "use client";
 
-export type ServiceItem = {
-  _key: string;
-  title: string;
-  summary: string;
-  detail: string;
-  tags: string[];
-};
+import type { HOME_PAGE_QUERY_RESULT } from "@/sanity.types";
+import type { SanityData } from "@/sanity/lib/types";
 
-export type ServicesSectionContent = {
-  headline: string;
-  intro: string;
-  items: ServiceItem[];
-};
+type ServicesContent = NonNullable<SanityData<HOME_PAGE_QUERY_RESULT>["services"]>;
 
-export function ServicesSection({ content }: { content: ServicesSectionContent }) {
+export function ServicesSection({ content }: { content: ServicesContent }) {
+  const items = content.items ?? [];
+
   return (
     <section id="services" className="border-t border-border py-20 sm:py-28">
       <div className="mb-12 flex flex-col gap-4 sm:mb-16">
@@ -27,7 +20,7 @@ export function ServicesSection({ content }: { content: ServicesSectionContent }
       </div>
 
       <div className="flex flex-col gap-6">
-        {content.items.map((service) => (
+        {items.map((service) => (
           <div
             key={service._key}
             className="group relative border border-border bg-card p-8 transition-all duration-300 hover:border-foreground/20 sm:p-10 lg:p-12"
@@ -44,7 +37,7 @@ export function ServicesSection({ content }: { content: ServicesSectionContent }
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
+                  {service.tags?.map((tag) => (
                     <span
                       key={tag}
                       className="border border-border/80 bg-background px-3 py-1 font-mono text-xs font-medium text-muted-foreground transition-colors group-hover:border-foreground/15"

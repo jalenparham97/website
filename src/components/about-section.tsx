@@ -2,26 +2,19 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { stegaClean } from "@sanity/client/stega";
 import { ArrowDown01Icon, ArrowRight01Icon, ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { buttonVariants } from "@/components/ui/button";
+import type { HOME_PAGE_QUERY_RESULT } from "@/sanity.types";
+import type { SanityData } from "@/sanity/lib/types";
 
-export type AboutPrinciple = {
-  _key: string;
-  title: string;
-  summary: string;
-  description: string;
-};
+type AboutContent = NonNullable<SanityData<HOME_PAGE_QUERY_RESULT>["about"]>;
 
-export type AboutSectionContent = {
-  headline: string;
-  body: string[];
-  cta: { label: string; href: string };
-  principles: AboutPrinciple[];
-};
-
-export function AboutSection({ content }: { content: AboutSectionContent }) {
-  const [activePrinciple, setActivePrinciple] = useState(content.principles[0]?._key);
+export function AboutSection({ content }: { content: AboutContent }) {
+  const principles = content.principles ?? [];
+  const [activePrinciple, setActivePrinciple] = useState(principles[0]?._key);
+  const ctaHref = content.cta?.href ? stegaClean(content.cta.href) : undefined;
 
   return (
     <section id="about" className="border-t border-border py-20 sm:py-28">
@@ -32,24 +25,26 @@ export function AboutSection({ content }: { content: AboutSectionContent }) {
           </h2>
 
           <div className="flex flex-col gap-5 text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-            {content.body.map((paragraph, index) => (
+            {content.body?.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>
 
-          <Link
-            href={content.cta.href}
-            className={buttonVariants({
-              size: "lg",
-              className:
-                "group mt-2 w-full gap-2.5 rounded-none px-7 text-base font-medium sm:w-fit",
-            })}
-          >
-            <span>{content.cta.label}</span>
-            <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
-              <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.5} />
-            </span>
-          </Link>
+          {ctaHref && (
+            <Link
+              href={ctaHref}
+              className={buttonVariants({
+                size: "lg",
+                className:
+                  "group mt-2 w-full gap-2.5 rounded-none px-7 text-base font-medium sm:w-fit",
+              })}
+            >
+              <span>{content.cta?.label}</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
+                <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.5} />
+              </span>
+            </Link>
+          )}
         </div>
 
         <div className="flex flex-col border border-border bg-card p-6 sm:p-8">
@@ -60,7 +55,7 @@ export function AboutSection({ content }: { content: AboutSectionContent }) {
           </div>
 
           <div className="flex flex-col divide-y divide-border border border-border">
-            {content.principles.map((principle) => {
+            {principles.map((principle) => {
               const isActive = principle._key === activePrinciple;
               return (
                 <button

@@ -67,7 +67,7 @@ export function SiteHeader() {
         </div>
         <Drawer open={isMenuOpen} onOpenChange={setIsMenuOpen} swipeDirection="right">
           <DrawerTrigger
-            className="relative inline-flex size-11 items-center justify-center border border-border text-foreground md:hidden"
+            className="relative inline-flex size-11 items-center justify-center border border-border bg-muted text-foreground transition-colors hover:border-foreground/30 dark:hover:bg-muted/80 md:hidden"
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           >
             <span
@@ -99,7 +99,7 @@ export function SiteHeader() {
                 />
               </span>
               <DrawerClose
-                className="relative inline-flex size-11 items-center justify-center border border-border text-foreground transition-colors hover:bg-muted"
+                className="relative inline-flex size-11 items-center justify-center border border-border bg-muted text-foreground transition-colors hover:border-foreground/30 dark:hover:bg-muted/80"
                 aria-label="Close navigation menu"
               >
                 <span className="absolute h-px w-5 rotate-45 bg-current" />

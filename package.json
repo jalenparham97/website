@@ -9,8 +9,8 @@
     "start": "next start",
     "lint": "oxlint src",
     "lint:fix": "oxlint src --fix",
-    "sanity:typegen": "sanity schema extract && sanity typegen generate",
-    "sanity:seed": "sanity exec scripts/seed-home-page.mjs --with-user-token"
+    "sanity:typegen": "$HOME/.nvm/versions/node/v24.9.0/bin/node node_modules/sanity/bin/sanity schema extract --force && $HOME/.nvm/versions/node/v24.9.0/bin/node node_modules/sanity/bin/sanity typegen generate",
+    "sanity:seed": "$HOME/.nvm/versions/node/v24.9.0/bin/node node_modules/sanity/bin/sanity exec"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

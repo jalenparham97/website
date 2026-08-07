@@ -1,5 +1,72 @@
 import { defineQuery } from "next-sanity";
 
+export const CONTACT_PAGE_QUERY = defineQuery(`
+  *[_id == "contactPage"][0]{
+    title,
+    intro{ headline, description },
+    emailSection{ headline, description, email },
+    formSection{ headline, description },
+    seo{
+      title,
+      description,
+      image,
+      noIndex
+    }
+  }
+`);
+
+export const WORK_PAGE_QUERY = defineQuery(`
+  *[_id == "workPage"][0]{
+    title,
+    intro{ headline, description },
+    featuredProjects[]->{ _id, title, description, "href": link, "image": image.asset->url, tags },
+    cta{ headline, description, link{ label, href } },
+    seo{
+      title,
+      description,
+      image,
+      noIndex
+    }
+  }
+`);
+
+export const SERVICES_PAGE_QUERY = defineQuery(`
+  *[_id == "servicesPage"][0]{
+    title,
+    intro{ headline, description, packagesLabel, cta{ label, href } },
+    offer{ headline, description, items[]{ _key, title, description, icon } },
+    packages{ headline, description, ctaLabel, items[]{ _key, name, price, blurb, features, featured }, note, noteLink{ label, href } },
+    finalCta{ headline, description, link{ label, href } },
+    seo{
+      title,
+      description,
+      image,
+      noIndex
+    }
+  }
+`);
+
+export const ABOUT_PAGE_QUERY = defineQuery(`
+  *[_id == "aboutPage"][0]{
+    title,
+    story{
+      headline,
+      body
+    },
+    cta{
+      headline,
+      intro,
+      link{ label, href }
+    },
+    seo{
+      title,
+      description,
+      image,
+      noIndex
+    }
+  }
+`);
+
 export const HOME_PAGE_QUERY = defineQuery(`
   *[_id == "homePage"][0]{
     title,
@@ -49,14 +116,11 @@ export const HOME_PAGE_QUERY = defineQuery(`
       intro,
       email
     },
-    "seo": {
-      "title": coalesce(seo.title, "Jalen Parham | Independent web designer & developer"),
-      "description": coalesce(
-        seo.description,
-        "Jalen Parham helps small businesses turn good ideas into clear, capable websites."
-      ),
+    seo{
+      title,
+      description,
       image,
-      "noIndex": seo.noIndex == true
+      noIndex
     }
   }
 `);

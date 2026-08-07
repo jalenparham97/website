@@ -46,7 +46,6 @@ const formbox = await client.createOrReplace({
   image: formboxImage,
   link: 'https://formbox.app/',
   tags: ['SaaS', 'Forms'],
-  featured: true,
 });
 
 const beyondBirths = await client.createOrReplace({
@@ -59,7 +58,6 @@ const beyondBirths = await client.createOrReplace({
   image: beyondBirthsImage,
   link: 'https://www.beyondbirths.org/',
   tags: ['Education', 'Healthcare'],
-  featured: true,
 });
 
 const homePage = await client.createOrReplace({

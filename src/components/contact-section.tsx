@@ -1,22 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { stegaClean } from "@sanity/client/stega";
 import { Copy01Icon, Mail01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ContactForm } from "@/components/contact-form";
+import type { HOME_PAGE_QUERY_RESULT } from "@/sanity.types";
+import type { SanityData } from "@/sanity/lib/types";
 
-export type ContactSectionContent = {
-  headline: string;
-  intro: string;
-  email: string;
-};
+type ContactContent = NonNullable<SanityData<HOME_PAGE_QUERY_RESULT>["contact"]>;
 
-export function ContactSection({ content }: { content: ContactSectionContent }) {
+export function ContactSection({ content }: { content: ContactContent }) {
+  const email = content.email ? stegaClean(content.email) : "";
   const [copied, setCopied] = useState(false);
 
   async function handleCopyEmail() {
     try {
-      await navigator.clipboard.writeText(content.email);
+      await navigator.clipboard.writeText(email);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -40,7 +40,7 @@ export function ContactSection({ content }: { content: ContactSectionContent }) 
 
           <div className="border-t border-border pt-6">
             <a
-              href={`mailto:${content.email}`}
+              href={`mailto:${email}`}
               className="text-base font-medium text-foreground transition-opacity hover:opacity-75 sm:text-lg"
             >
               {content.email}
@@ -48,7 +48,7 @@ export function ContactSection({ content }: { content: ContactSectionContent }) 
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
-                href={`mailto:${content.email}`}
+                href={`mailto:${email}`}
                 className="inline-flex flex-1 items-center justify-center gap-2 border border-foreground bg-foreground px-5 py-3.5 text-base font-medium text-background transition-colors hover:bg-foreground/90 sm:py-3"
               >
                 Open email
@@ -76,7 +76,7 @@ export function ContactSection({ content }: { content: ContactSectionContent }) 
         </div>
 
         <div className="border border-border bg-card p-6 sm:p-10 lg:p-12">
-          <ContactForm />
+          <ContactForm email={email} />
         </div>
       </div>
     </section>

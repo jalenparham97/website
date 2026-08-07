@@ -199,12 +199,15 @@ export const homePage = defineType({
         }),
         defineField({
           name: "featuredProjects",
-          title: "Featured projects",
+          title: "Projects to show",
+          description:
+            "Choose which projects appear in this section and drag to set the order. Only projects listed here are shown on the homepage.",
           type: "array",
           of: [
             defineArrayMember({
               type: "reference",
               to: [{ type: "project" }],
+              options: { disableNew: true },
             }),
           ],
           validation: (rule) => rule.unique(),

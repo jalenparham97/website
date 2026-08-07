@@ -61,7 +61,8 @@ export function ProjectCard({ project, featured = false, className }: ProjectCar
 
       <div className={cn("flex flex-1 flex-col gap-4 p-5 sm:p-6", featured && "sm:p-7")}>
         <div className="flex flex-1 flex-col gap-3">
-          <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+          <div className="flex flex-col gap-2.5">
+            <span className="font-mono text-xs text-muted-foreground">{hostLabel(href)}</span>
             <h3
               className={cn(
                 "font-semibold tracking-[-0.03em] text-foreground",
@@ -70,7 +71,6 @@ export function ProjectCard({ project, featured = false, className }: ProjectCar
             >
               {project.title}
             </h3>
-            <span className="font-mono text-xs text-muted-foreground">{hostLabel(href)}</span>
           </div>
           <p
             className={cn(

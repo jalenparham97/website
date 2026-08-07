@@ -1,9 +1,10 @@
 import { Folder01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { createElement } from "react";
 import { defineField, defineType } from "sanity";
 
 function ProjectIcon() {
-  return <HugeiconsIcon icon={Folder01Icon} size={18} strokeWidth={1.7} />;
+  return createElement(HugeiconsIcon, { icon: Folder01Icon, size: 18, strokeWidth: 1.7 });
 }
 
 export const project = defineType({

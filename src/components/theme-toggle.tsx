@@ -2,9 +2,9 @@
 
 import { Moon02Icon, Sun01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/theme-provider";
 
 export function ThemeToggle({ showLabel = false }: { showLabel?: boolean }) {
   const { resolvedTheme, setTheme } = useTheme();

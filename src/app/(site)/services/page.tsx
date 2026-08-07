@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { Suspense } from "react";
 import { ServicesPage } from "@/components/pages/services/services-page";
-import { sanityFetch } from "@/sanity/lib/live";
+import {
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  type DynamicFetchOptions,
+} from "@/sanity/lib/live";
 import { SERVICES_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
-  "use cache";
-  const { data } = await sanityFetch({ query: SERVICES_PAGE_QUERY, stega: false });
+  const { perspective, variant } = await getDynamicFetchOptions();
+  const { data } = await sanityFetchMetadata({
+    query: SERVICES_PAGE_QUERY,
+    perspective,
+    variant,
+  });
 
   return {
     title: data?.seo?.title,
@@ -15,8 +26,33 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ServicesRoute() {
+  const { isEnabled } = await draftMode();
+
+  if (isEnabled) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicServicesRoute />
+      </Suspense>
+    );
+  }
+
+  return <CachedServicesRoute perspective="published" stega={false} />;
+}
+
+async function DynamicServicesRoute() {
+  const options = await getDynamicFetchOptions();
+
+  return <CachedServicesRoute {...options} />;
+}
+
+async function CachedServicesRoute({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
-  const { data } = await sanityFetch({ query: SERVICES_PAGE_QUERY });
+  const { data } = await sanityFetch({
+    query: SERVICES_PAGE_QUERY,
+    perspective,
+    variant,
+    stega,
+  });
 
   return (
     <main id="top" className="min-h-svh overflow-x-clip">

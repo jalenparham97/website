@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { Suspense } from "react";
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
 import { HeroSection } from "@/components/hero-section";
 import { PortfolioSection } from "@/components/portfolio-section";
 import { ServicesSection } from "@/components/services-section";
-import { sanityFetch } from "@/sanity/lib/live";
+import {
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  type DynamicFetchOptions,
+} from "@/sanity/lib/live";
 import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
-  "use cache";
-  const { data } = await sanityFetch({
+  const { perspective, variant } = await getDynamicFetchOptions();
+  const { data } = await sanityFetchMetadata({
     query: HOME_PAGE_QUERY,
-    stega: false,
+    perspective,
+    variant,
   });
 
   return {
@@ -22,9 +30,32 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
+  const { isEnabled } = await draftMode();
+
+  if (isEnabled) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicHome />
+      </Suspense>
+    );
+  }
+
+  return <CachedHome perspective="published" stega={false} />;
+}
+
+async function DynamicHome() {
+  const options = await getDynamicFetchOptions();
+
+  return <CachedHome {...options} />;
+}
+
+async function CachedHome({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
   const { data } = await sanityFetch({
     query: HOME_PAGE_QUERY,
+    perspective,
+    variant,
+    stega,
   });
   const page = data!;
 

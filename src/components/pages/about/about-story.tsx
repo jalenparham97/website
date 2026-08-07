@@ -25,7 +25,7 @@ export function AboutStory({ data }: { data: SanityData<ABOUT_PAGE_QUERY_RESULT>
 
       <footer className="mx-auto mt-20 max-w-3xl border-t border-border pt-10 sm:mt-24 sm:flex sm:items-end sm:justify-between sm:gap-12 sm:pt-12">
         <div className="max-w-xl">
-          <h2 className="text-balance text-3xl font-medium leading-tight tracking-[-0.03em] text-foreground sm:text-4xl">
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-[-0.03em] text-foreground sm:text-4xl">
             {cta?.headline}
           </h2>
           {cta?.intro && (

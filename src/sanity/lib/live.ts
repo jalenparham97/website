@@ -1,4 +1,10 @@
-import { defineLive } from "next-sanity/live";
+import { cookies, draftMode } from "next/headers";
+import {
+  defineLive,
+  resolvePerspectiveFromCookies,
+  resolveVariantFromCookies,
+  type LivePerspective,
+} from "next-sanity/live";
 import { client } from "@/sanity/lib/client";
 import { token } from "@/sanity/lib/token";
 
@@ -8,4 +14,39 @@ export const { sanityFetch, SanityLive } = defineLive({
   }),
   serverToken: token,
   browserToken: token,
+  strict: true,
 });
+
+export interface DynamicFetchOptions {
+  perspective: LivePerspective;
+  variant?: string;
+  stega: boolean;
+}
+
+export async function getDynamicFetchOptions(): Promise<DynamicFetchOptions> {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (!isDraftMode) {
+    return { perspective: "published", stega: false };
+  }
+
+  const cookieStore = await cookies();
+  const perspective = await resolvePerspectiveFromCookies({ cookies: cookieStore });
+  const variant = await resolveVariantFromCookies({ cookies: cookieStore });
+
+  return { perspective: perspective ?? "drafts", variant, stega: true };
+}
+
+export async function sanityFetchMetadata<const QueryString extends string>({
+  query,
+  perspective,
+  variant,
+}: {
+  query: QueryString;
+  perspective: LivePerspective;
+  variant?: string;
+}) {
+  "use cache";
+
+  return sanityFetch({ query, perspective, variant, stega: false });
+}

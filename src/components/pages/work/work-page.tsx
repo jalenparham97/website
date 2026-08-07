@@ -35,7 +35,7 @@ export function WorkPage({ data }: { data: SanityData<WORK_PAGE_QUERY_RESULT> })
 
       <footer className="mt-16 border-t border-border pt-10 sm:mt-20 sm:flex sm:items-end sm:justify-between sm:gap-12 sm:pt-12">
         <div className="max-w-xl">
-          <h2 className="text-balance text-3xl font-medium leading-tight tracking-[-0.03em] text-foreground sm:text-4xl">
+          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-[-0.03em] text-foreground sm:text-4xl">
             {data.cta?.headline}
           </h2>
           <p className="mt-4 text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">

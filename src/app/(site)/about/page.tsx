@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { Suspense } from "react";
 import { AboutStory } from "@/components/pages/about/about-story";
-import { sanityFetch } from "@/sanity/lib/live";
+import {
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  type DynamicFetchOptions,
+} from "@/sanity/lib/live";
 import { ABOUT_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
-  "use cache";
-  const { data } = await sanityFetch({ query: ABOUT_PAGE_QUERY, stega: false });
+  const { perspective, variant } = await getDynamicFetchOptions();
+  const { data } = await sanityFetchMetadata({
+    query: ABOUT_PAGE_QUERY,
+    perspective,
+    variant,
+  });
 
   return {
     title: data?.seo?.title,
@@ -15,8 +26,33 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
+  const { isEnabled } = await draftMode();
+
+  if (isEnabled) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicAboutPage />
+      </Suspense>
+    );
+  }
+
+  return <CachedAboutPage perspective="published" stega={false} />;
+}
+
+async function DynamicAboutPage() {
+  const options = await getDynamicFetchOptions();
+
+  return <CachedAboutPage {...options} />;
+}
+
+async function CachedAboutPage({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
-  const { data } = await sanityFetch({ query: ABOUT_PAGE_QUERY });
+  const { data } = await sanityFetch({
+    query: ABOUT_PAGE_QUERY,
+    perspective,
+    variant,
+    stega,
+  });
 
   return (
     <main id="top" className="min-h-svh overflow-x-clip">

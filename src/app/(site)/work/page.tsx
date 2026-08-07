@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { Suspense } from "react";
 import { WorkPage } from "@/components/pages/work/work-page";
-import { sanityFetch } from "@/sanity/lib/live";
+import {
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  type DynamicFetchOptions,
+} from "@/sanity/lib/live";
 import { WORK_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
-  "use cache";
-  const { data } = await sanityFetch({ query: WORK_PAGE_QUERY, stega: false });
+  const { perspective, variant } = await getDynamicFetchOptions();
+  const { data } = await sanityFetchMetadata({
+    query: WORK_PAGE_QUERY,
+    perspective,
+    variant,
+  });
 
   return {
     title: data?.seo?.title,
@@ -15,8 +26,33 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function WorkRoute() {
+  const { isEnabled } = await draftMode();
+
+  if (isEnabled) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicWorkRoute />
+      </Suspense>
+    );
+  }
+
+  return <CachedWorkRoute perspective="published" stega={false} />;
+}
+
+async function DynamicWorkRoute() {
+  const options = await getDynamicFetchOptions();
+
+  return <CachedWorkRoute {...options} />;
+}
+
+async function CachedWorkRoute({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
-  const { data } = await sanityFetch({ query: WORK_PAGE_QUERY });
+  const { data } = await sanityFetch({
+    query: WORK_PAGE_QUERY,
+    perspective,
+    variant,
+    stega,
+  });
 
   return (
     <main id="top" className="min-h-svh overflow-x-clip">

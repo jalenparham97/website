@@ -21,7 +21,6 @@ const icons = {
 export function ServicesPage({ data }: { data: SanityData<SERVICES_PAGE_QUERY_RESULT> }) {
   const { intro, offer, packages, finalCta } = data;
   const introCtaHref = intro?.cta?.href ? stegaClean(intro.cta.href) : undefined;
-  const noteLinkHref = packages?.noteLink?.href ? stegaClean(packages.noteLink.href) : undefined;
   const finalCtaHref = finalCta?.link?.href ? stegaClean(finalCta.link.href) : undefined;
 
   return (
@@ -188,20 +187,9 @@ export function ServicesPage({ data }: { data: SanityData<SERVICES_PAGE_QUERY_RE
             </article>
           ))}
         </div>
-        {packages?.note && (
-          <p className="mt-5 text-base leading-7 text-muted-foreground">
-            {packages.note}{" "}
-            {noteLinkHref && (
-              <Link href={noteLinkHref} className="font-medium text-foreground underline">
-                {packages.noteLink?.label}
-              </Link>
-            )}
-            .
-          </p>
-        )}
       </section>
 
-      <section className="mt-16 border border-foreground bg-foreground px-5 py-8 text-background sm:mt-24 sm:flex sm:items-center sm:justify-between sm:gap-12 sm:px-8 sm:py-12">
+      <section className="mt-16 border border-foreground bg-foreground px-5 py-8 text-background sm:mt-24 lg:flex lg:items-center lg:justify-between lg:gap-12 sm:px-8 sm:py-12">
         <div className="max-w-md">
           <h2 className="text-[1.5rem] font-semibold sm:text-[2rem]">{finalCta?.headline}</h2>
           <p className="mt-3 text-base leading-7 text-background/75 sm:text-lg">
@@ -211,7 +199,7 @@ export function ServicesPage({ data }: { data: SanityData<SERVICES_PAGE_QUERY_RE
         {finalCtaHref && (
           <Link
             href={finalCtaHref}
-            className="group mt-6 inline-flex items-center justify-center gap-2 rounded-none border border-background bg-background px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-background/90 sm:mt-0"
+            className="group mt-6 inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-none border border-background bg-background px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-background/90 lg:mt-0 lg:w-auto"
           >
             <span>{finalCta?.link?.label}</span>
             <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none">

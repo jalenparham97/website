@@ -183,14 +183,6 @@ export const servicesPage = defineType({
           ],
           validation: (rule) => rule.min(1),
         }),
-        defineField({
-          name: "note",
-          title: "Note",
-          type: "text",
-          rows: 2,
-          validation: (rule) => rule.required(),
-        }),
-        defineField({ ...linkField, name: "noteLink", title: "Note link" }),
       ],
     }),
     defineField({

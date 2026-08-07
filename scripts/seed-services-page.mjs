@@ -94,8 +94,6 @@ await client.createOrReplace({
         featured: false,
       },
     ],
-    note: 'Need something outside these packages?',
-    noteLink: { label: 'Tell me what you need', href: '/contact' },
   },
   finalCta: {
     headline: 'Ready when you are',

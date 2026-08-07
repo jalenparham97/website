@@ -35,7 +35,7 @@ export const SERVICES_PAGE_QUERY = defineQuery(`
     title,
     intro{ headline, description, packagesLabel, cta{ label, href } },
     offer{ headline, description, items[]{ _key, title, description, icon } },
-    packages{ headline, description, ctaLabel, items[]{ _key, name, price, blurb, features, featured }, note, noteLink{ label, href } },
+    packages{ headline, description, ctaLabel, items[]{ _key, name, price, blurb, features, featured } },
     finalCta{ headline, description, link{ label, href } },
     seo{
       title,

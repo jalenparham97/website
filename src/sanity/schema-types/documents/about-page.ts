@@ -35,7 +35,7 @@ export const aboutPage = defineType({
           name: "body",
           title: "Body",
           type: "array",
-          of: [defineArrayMember({ type: "text", rows: 4 })],
+          of: [defineArrayMember({ type: "block" })],
           validation: (rule) => rule.required().min(1),
         }),
       ],

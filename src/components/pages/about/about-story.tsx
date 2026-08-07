@@ -2,6 +2,7 @@ import Link from "next/link";
 import { stegaClean } from "@sanity/client/stega";
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { PortableText } from "next-sanity";
 import type { ABOUT_PAGE_QUERY_RESULT } from "@/sanity.types";
 import type { SanityData } from "@/sanity/lib/types";
 
@@ -17,9 +18,7 @@ export function AboutStory({ data }: { data: SanityData<ABOUT_PAGE_QUERY_RESULT>
           {story?.headline}
         </h1>
         <div className="mt-8 space-y-6 text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-          {story?.body?.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
+          {story?.body && <PortableText value={story.body} />}
         </div>
       </header>
 

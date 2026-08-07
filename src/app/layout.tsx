@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
@@ -37,11 +35,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem={false}
           disableTransitionOnChange
         >
-          <SiteHeader />
           {children}
-          <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
-            <SiteFooter />
-          </div>
         </ThemeProvider>
         <SanityLive />
         {(await draftMode()).isEnabled && <VisualEditing />}

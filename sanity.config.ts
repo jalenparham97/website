@@ -2,13 +2,17 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { presentationTool } from "sanity/presentation";
-import { resolve } from "./presentation/resolve";
-import { schemaTypes } from "./schemaTypes";
-import { structure } from "./structure";
+import { resolve } from "./src/sanity/presentation/resolve";
+import { homePage } from "./src/sanity/schema-types/documents/home-page";
+import { project } from "./src/sanity/schema-types/documents/project";
+import { link } from "./src/sanity/schema-types/objects/link";
+import { seo } from "./src/sanity/schema-types/objects/seo";
+import { structure } from "./src/sanity/structure";
 
 export default defineConfig({
   name: "default",
   title: "Personal Website",
+  basePath: "/studio",
 
   projectId: "k2yb8t20",
   dataset: "production",
@@ -19,7 +23,6 @@ export default defineConfig({
     presentationTool({
       resolve,
       previewUrl: {
-        origin: process.env.SANITY_STUDIO_PREVIEW_ORIGIN || "https://my-website.localhost:1355",
         previewMode: {
           enable: "/api/draft-mode/enable",
           disable: "/api/draft-mode/disable",
@@ -29,6 +32,6 @@ export default defineConfig({
   ],
 
   schema: {
-    types: schemaTypes,
+    types: [homePage, project, link, seo],
   },
 });

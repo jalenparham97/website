@@ -6,8 +6,8 @@ export default defineCliConfig({
     dataset: "production",
   },
   typegen: {
-    path: "../src/**/*.{ts,tsx}",
+    path: "src/**/*.{ts,tsx}",
     schema: "schema.json",
-    generates: "../src/sanity.types.ts",
+    generates: "src/sanity.types.ts",
   },
 });

@@ -1,18 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { stegaClean } from "@sanity/client/stega";
 import { Copy01Icon, Mail01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ContactForm } from "@/components/contact-form";
+import type { HOME_PAGE_QUERY_RESULT } from "@/sanity.types";
+import type { SanityData } from "@/sanity/lib/types";
 
-const CONTACT_EMAIL = "jalenparham97@gmail.com";
+type ContactContent = NonNullable<SanityData<HOME_PAGE_QUERY_RESULT>["contact"]>;
 
-export function ContactSection() {
+export function ContactSection({ content }: { content: ContactContent }) {
+  const email = content.email ? stegaClean(content.email) : "";
   const [copied, setCopied] = useState(false);
 
   async function handleCopyEmail() {
     try {
-      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      await navigator.clipboard.writeText(email);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -26,26 +30,25 @@ export function ContactSection() {
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-5">
             <h2 className="text-[clamp(2.25rem,4.5vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
-              Let&apos;s work together
+              {content.headline}
             </h2>
 
             <p className="max-w-xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-              Have a project in mind? I am always open to discussing new projects, creative ideas or
-              opportunities to be a part of.
+              {content.intro}
             </p>
           </div>
 
           <div className="border-t border-border pt-6">
             <a
-              href={`mailto:${CONTACT_EMAIL}`}
+              href={`mailto:${email}`}
               className="text-base font-medium text-foreground transition-opacity hover:opacity-75 sm:text-lg"
             >
-              {CONTACT_EMAIL}
+              {content.email}
             </a>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
-                href={`mailto:${CONTACT_EMAIL}`}
+                href={`mailto:${email}`}
                 className="inline-flex flex-1 items-center justify-center gap-2 border border-foreground bg-foreground px-5 py-3.5 text-base font-medium text-background transition-colors hover:bg-foreground/90 sm:py-3"
               >
                 Open email
@@ -72,9 +75,8 @@ export function ContactSection() {
           </div>
         </div>
 
-        {/* Right Column: Contact Form Box */}
         <div className="border border-border bg-card p-6 sm:p-10 lg:p-12">
-          <ContactForm />
+          <ContactForm email={email} />
         </div>
       </div>
     </section>

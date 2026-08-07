@@ -2,80 +2,51 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
+import { stegaClean } from "@sanity/client/stega";
+import { ArrowDown01Icon, ArrowRight01Icon, ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { buttonVariants } from "@/components/ui/button";
+import type { HOME_PAGE_QUERY_RESULT } from "@/sanity.types";
+import type { SanityData } from "@/sanity/lib/types";
 
-const principles = [
-  {
-    id: "systems",
-    title: "Clean Design",
-    summary: "A simple visual style that keeps your message clear.",
-    description:
-      "Your website should feel welcoming from the first visit, helping people understand your work and feel good about taking the next step.",
-  },
-  {
-    id: "engineering",
-    title: "Built to Last",
-    summary: "A dependable website that stays easy to use.",
-    description:
-      "Your website should feel good to use now and continue serving your business as it grows. Keeping your content current should feel simple, familiar, and never like a chore.",
-  },
-  {
-    id: "collaboration",
-    title: "Direct Collaboration",
-    summary: "Working directly with the person building your site.",
-    description:
-      "No agency account managers or telephone games. You get direct, honest communication from kick-off to launch day and beyond.",
-  },
-];
+type AboutContent = NonNullable<SanityData<HOME_PAGE_QUERY_RESULT>["about"]>;
 
-export function AboutSection() {
-  const [activePrinciple, setActivePrinciple] = useState(principles[0].id);
-
-  const activeData = principles.find((p) => p.id === activePrinciple) ?? principles[0];
+export function AboutSection({ content }: { content: AboutContent }) {
+  const principles = content.principles ?? [];
+  const [activePrinciple, setActivePrinciple] = useState(principles[0]?._key);
+  const ctaHref = content.cta?.href ? stegaClean(content.cta.href) : undefined;
 
   return (
     <section id="about" className="border-t border-border py-20 sm:py-28">
-      {/* Main Narrative Split Layout */}
       <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-        {/* Left Column: Big Lead Statement & Narrative */}
         <div className="flex flex-col gap-6">
-          <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.035em]">
-            Hi, I&apos;m Jalen. I design and build exceptional digital experiences.
+          <h2 className="text-[clamp(2.25rem,4vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.035em]">
+            {content.headline}
           </h2>
 
           <div className="flex flex-col gap-5 text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-            <p>
-              I work with people and small businesses to create websites that feel calm,
-              intentional, and easy to trust.
-            </p>
-            <p>
-              I care about the details people notice, from clear pages and simple choices to the
-              small moments that make a website feel welcoming.
-            </p>
-            <p>
-              If you&apos;re building something that matters to your business, I help turn your
-              ideas into a clear, polished online experience.
-            </p>
+            {content.body?.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </div>
 
-          <Link
-            href="/about"
-            className={buttonVariants({
-              size: "lg",
-              className:
-                "group mt-2 w-full gap-2.5 rounded-none px-7 text-base font-medium sm:w-auto",
-            })}
-          >
-            <span>More about me</span>
-            <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
-              <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.5} />
-            </span>
-          </Link>
+          {ctaHref && (
+            <Link
+              href={ctaHref}
+              className={buttonVariants({
+                size: "lg",
+                className:
+                  "group mt-2 w-full gap-2.5 rounded-none px-7 text-base font-medium sm:w-fit",
+              })}
+            >
+              <span>{content.cta?.label}</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
+                <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.5} />
+              </span>
+            </Link>
+          )}
         </div>
 
-        {/* Right Column: Interactive Craft Philosophy */}
         <div className="flex flex-col border border-border bg-card p-6 sm:p-8">
           <div className="mb-6 flex items-center justify-between border-b border-border pb-4">
             <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
@@ -83,45 +54,66 @@ export function AboutSection() {
             </h3>
           </div>
 
-          {/* Principle Buttons */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col divide-y divide-border border border-border">
             {principles.map((principle) => {
-              const isActive = principle.id === activePrinciple;
+              const isActive = principle._key === activePrinciple;
               return (
                 <button
-                  key={principle.id}
+                  key={principle._key}
                   type="button"
-                  onClick={() => setActivePrinciple(principle.id)}
-                  className={`group relative flex flex-col text-left p-5 transition-all duration-200 ${
+                  onClick={() => setActivePrinciple(principle._key)}
+                  aria-expanded={isActive}
+                  className={`group flex cursor-pointer flex-col p-5 text-left transition-colors duration-200 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-foreground ${
                     isActive
                       ? "bg-foreground text-background"
                       : "bg-transparent text-foreground hover:bg-muted/60"
                   }`}
                 >
-                  <span
-                    aria-hidden="true"
-                    className={`absolute right-4 top-4 text-sm transition-transform duration-200 ${
-                      isActive ? "translate-x-1" : "opacity-0 group-hover:opacity-100"
-                    }`}
-                  >
-                    <HugeiconsIcon icon={ArrowUpRight01Icon} size={18} strokeWidth={1.5} />
+                  <span className="flex items-center justify-between gap-4">
+                    <span className="text-lg font-medium tracking-[-0.02em]">
+                      {principle.title}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={`shrink-0 transition-all duration-300 ${
+                        isActive
+                          ? "text-background/70"
+                          : "text-muted-foreground group-hover:translate-x-0.5 group-hover:text-foreground"
+                      }`}
+                    >
+                      <HugeiconsIcon
+                        icon={isActive ? ArrowDown01Icon : ArrowRight01Icon}
+                        size={18}
+                        strokeWidth={1.5}
+                      />
+                    </span>
                   </span>
-                  <h4 className="text-lg font-medium tracking-[-0.02em]">{principle.title}</h4>
-                  <p
-                    className={`mt-1 text-base ${
+                  <span
+                    className={`mt-1 block text-base ${
                       isActive ? "text-background/80" : "text-muted-foreground"
                     }`}
                   >
                     {principle.summary}
-                  </p>
+                  </span>
+                  <span
+                    className={`block transition-all duration-300 ease-out ${
+                      isActive ? "pt-3 opacity-100" : "h-0 opacity-0"
+                    }`}
+                  >
+                    <span
+                      aria-hidden={!isActive}
+                      className={`block h-40 text-base leading-6 sm:h-24 ${
+                        isActive
+                          ? "text-background/75"
+                          : "invisible pointer-events-none text-transparent"
+                      }`}
+                    >
+                      {principle.description}
+                    </span>
+                  </span>
                 </button>
               );
             })}
-          </div>
-
-          {/* Expanded Active Principle Description */}
-          <div className="mt-6 border-t border-border pt-6">
-            <p className="text-base leading-6 text-muted-foreground">{activeData.description}</p>
           </div>
         </div>
       </div>

@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { stegaClean } from "@sanity/client/stega";
 import { BubbleChatIcon, Copy01Icon, Mail01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ContactForm } from "@/components/contact-form";
+import type { CONTACT_PAGE_QUERY_RESULT } from "@/sanity.types";
+import type { SanityData } from "@/sanity/lib/types";
 
-const CONTACT_EMAIL = "jalenparham97@gmail.com";
-
-export function ContactPage() {
+export function ContactPage({ data }: { data: SanityData<CONTACT_PAGE_QUERY_RESULT> }) {
+  const email = data.emailSection?.email ? stegaClean(data.emailSection.email) : "";
   const [copied, setCopied] = useState(false);
 
   async function handleCopyEmail() {
     try {
-      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      await navigator.clipboard.writeText(email);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -24,11 +26,10 @@ export function ContactPage() {
     <div className="mx-auto max-w-5xl py-14 sm:py-20 lg:py-24">
       <header className="pb-6">
         <h1 className="max-w-3xl text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.035em] text-foreground sm:text-5xl sm:leading-[1.06] sm:tracking-[-0.04em] lg:text-[3.5rem] lg:leading-[1.05]">
-          Let&apos;s get in touch.
+          {data.intro?.headline}
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground sm:mt-5 sm:text-lg sm:leading-8">
-          Want to talk about a new website project or an idea you&apos;re still shaping? Reach out.
-          I&apos;d love to hear what you have in mind.
+          {data.intro?.description}
         </p>
       </header>
 
@@ -45,23 +46,23 @@ export function ContactPage() {
             id="email-path-heading"
             className="mt-6 text-[1.5rem] font-semibold tracking-[-0.03em] text-foreground sm:mt-8 sm:text-[1.75rem]"
           >
-            Email me
+            {data.emailSection?.headline}
           </h2>
           <p className="mt-3 max-w-md text-base leading-7 text-muted-foreground sm:leading-8">
-            Prefer your own inbox? Write me directly. I read every message and reply personally.
+            {data.emailSection?.description}
           </p>
 
           <div className="border-t border-border pt-6 sm:mt-8">
             <a
-              href={`mailto:${CONTACT_EMAIL}`}
+              href={`mailto:${email}`}
               className="text-base font-medium text-foreground transition-opacity hover:opacity-75 sm:text-lg"
             >
-              {CONTACT_EMAIL}
+              {data.emailSection?.email}
             </a>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
-                href={`mailto:${CONTACT_EMAIL}`}
+                href={`mailto:${email}`}
                 className="inline-flex flex-1 items-center justify-center gap-2 border border-foreground bg-foreground px-5 py-3.5 text-base font-medium text-background transition-colors hover:bg-foreground/90 sm:py-3"
               >
                 Open email
@@ -100,15 +101,14 @@ export function ContactPage() {
             id="form-path-heading"
             className="mt-6 text-[1.5rem] font-semibold tracking-[-0.03em] text-foreground sm:mt-8 sm:text-[1.75rem]"
           >
-            Send a message
+            {data.formSection?.headline}
           </h2>
           <p className="mt-3 max-w-md text-base leading-7 text-muted-foreground sm:leading-8">
-            Tell me a little about your website project or idea, and what you&apos;d like help with.
-            I usually reply within 24 hours.
+            {data.formSection?.description}
           </p>
 
           <div className="mt-6 border-t border-border pt-6 sm:mt-8 sm:pt-8">
-            <ContactForm />
+            <ContactForm email={email} />
           </div>
         </section>
       </div>

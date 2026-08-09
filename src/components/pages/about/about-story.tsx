@@ -2,8 +2,8 @@ import Link from "next/link";
 import { stegaClean } from "@sanity/client/stega";
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { PortableText } from "next-sanity";
 import type { ABOUT_PAGE_QUERY_RESULT } from "@/sanity.types";
+import { PortableText } from "@/sanity/lib/portable-text";
 import type { SanityData } from "@/sanity/lib/types";
 
 export function AboutStory({ data }: { data: SanityData<ABOUT_PAGE_QUERY_RESULT> }) {
@@ -17,9 +17,11 @@ export function AboutStory({ data }: { data: SanityData<ABOUT_PAGE_QUERY_RESULT>
         <h1 className="max-w-3xl text-balance text-[clamp(2.75rem,7vw,5rem)] font-medium leading-[0.98] tracking-[-0.04em] text-foreground">
           {story?.headline}
         </h1>
-        <div className="mt-8 space-y-6 text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-          {story?.body && <PortableText value={story.body} />}
-        </div>
+        {story?.body && (
+          <div className="typeset typeset-story mt-10 max-w-[36em] tracking-[-0.01em]">
+            <PortableText value={story.body} />
+          </div>
+        )}
       </header>
 
       <footer className="mx-auto mt-20 max-w-3xl border-t border-border pt-10 sm:mt-24 sm:flex sm:items-end sm:justify-between sm:gap-12 sm:pt-12">

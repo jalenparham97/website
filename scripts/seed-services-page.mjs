@@ -50,48 +50,100 @@ await client.createOrReplace({
   packages: {
     headline: 'Packages',
     description:
-      'Starting points with clear scope. Final pricing depends on pages, complexity, and timeline.',
+      'Straightforward website packages with content management included. Custom workflows are priced based on the needs of your business.',
+    note: 'Additional pages for the website are $100 each.',
     ctaLabel: 'Inquire',
     items: [
       {
-        _key: 'design',
-        name: 'Design',
-        price: 'From $1,500',
-        blurb: 'For a clear visual direction before anything is built.',
+        _key: 'basic',
+        name: 'Basic website',
+        price: 'From $600',
+        blurb:
+          'A custom website with up to five pages with content management included.',
         features: [
-          'Visual direction',
-          'Key page layouts',
-          'Mobile-first structure',
-          'Content outline',
-        ],
-        featured: false,
-      },
-      {
-        _key: 'website',
-        name: 'Website',
-        price: 'From $3,500',
-        blurb: 'Design and development for a complete, ready-to-launch site.',
-        features: [
+          'Up to 5 pages',
           'Custom design',
-          'Full development',
           'Responsive build',
-          'Basic content setup',
-          'Launch support',
+          'Content management',
         ],
         featured: true,
       },
       {
-        _key: 'care',
-        name: 'Care',
-        price: 'From $150/mo',
-        blurb: 'Ongoing updates and light maintenance after your site is live.',
+        _key: 'workflows',
+        name: 'Custom workflows',
+        price: 'From $800',
+        blurb:
+          'A custom website with content management plus custom workflows for your business.',
         features: [
-          'Content updates',
-          'Small design tweaks',
-          'Performance checks',
-          'Priority support',
+          'Everything in Basic',
+          'Database workflows',
+          'Email workflows',
+          'Custom functionality',
         ],
         featured: false,
+      },
+      {
+        _key: 'management',
+        name: 'Ongoing management',
+        price: '$75/month',
+        blurb:
+          'Keep your website current with ongoing website management after launch.',
+        features: [
+          'Routine content updates',
+          'Technical support',
+          'Light maintenance',
+          'Larger requests quoted separately',
+        ],
+        featured: false,
+      },
+    ],
+  },
+  faq: {
+    headline: 'Frequently Asked Questions',
+    description:
+      'Answers to common questions about starting and pricing your website project.',
+    items: [
+      {
+        _key: 'getting-started',
+        question: 'What are the first steps to starting a website project?',
+        answer:
+          'We will start with a conversation about your business, goals, and what the website needs to do. A short overview, any existing brand materials, and current content are helpful starting points. Once we have a clear scope and know we are a good fit, I will send a proposal that outlines the work, timeline, and project cost.',
+      },
+      {
+        _key: 'timeline',
+        question: 'How long does a typical website project take to complete?',
+        answer:
+          'The timeline depends on the project scope, how much content is needed, and the feedback process. I will include a realistic timeline in the proposal before work begins, and we can plan around a specific launch date when needed.',
+      },
+      {
+        _key: 'cost',
+        question: 'What affects the final cost of a website?',
+        answer:
+          'The final cost depends on the number of pages, the content needed, and any custom functionality or workflows. Additional pages are $100 each, and the full scope will be outlined in the proposal before work begins.',
+      },
+      {
+        _key: 'fit',
+        question: 'Is a custom website the right fit for my project?',
+        answer:
+          'A custom website is a good fit when you need an online presence built around your business rather than a template. During our initial conversation, we can look at your goals and decide whether a custom website is the right approach.',
+      },
+      {
+        _key: 'content-updates',
+        question: 'Can I update the website myself after launch?',
+        answer:
+          'Yes. Content management is included with the website packages, so you can keep your pages current after launch. Ongoing management is also available if you would rather have help with updates.',
+      },
+      {
+        _key: 'ongoing-management',
+        question: 'What does ongoing website management include?',
+        answer:
+          'Ongoing management includes website updates, technical support, light maintenance, and continued help keeping your site current after launch.',
+      },
+      {
+        _key: 'existing-materials',
+        question: 'Do you work with existing branding, copy, or tools?',
+        answer:
+          'Yes. I can work with the branding, copy, and tools you already use. We will review what is in place and decide what should carry into the new website.',
       },
     ],
   },

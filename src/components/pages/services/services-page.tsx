@@ -19,7 +19,7 @@ const icons = {
 };
 
 export function ServicesPage({ data }: { data: SanityData<SERVICES_PAGE_QUERY_RESULT> }) {
-  const { intro, offer, packages, finalCta } = data;
+  const { intro, offer, packages, faq, finalCta } = data;
   const introCtaHref = intro?.cta?.href ? stegaClean(intro.cta.href) : undefined;
   const finalCtaHref = finalCta?.link?.href ? stegaClean(finalCta.link.href) : undefined;
 
@@ -187,7 +187,48 @@ export function ServicesPage({ data }: { data: SanityData<SERVICES_PAGE_QUERY_RE
             </article>
           ))}
         </div>
+        {packages?.note && (
+          <p className="mt-5 text-center text-sm leading-6 text-muted-foreground">
+            {packages.note}
+          </p>
+        )}
       </section>
+
+      {faq?.items?.length ? (
+        <section aria-labelledby="pricing-faq" className="mt-16 pt-10 sm:mt-24 sm:pt-14">
+          <div className="max-w-3xl">
+            <h2
+              id="pricing-faq"
+              className="text-[1.5rem] font-semibold text-foreground sm:text-[2rem]"
+            >
+              {faq.headline}
+            </h2>
+            {faq.description && (
+              <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+                {faq.description}
+              </p>
+            )}
+          </div>
+          <div className="mt-8 border-t border-border sm:mt-10">
+            {faq.items.map((item) => (
+              <details key={item._key} className="group border-b border-border py-5 sm:py-6">
+                <summary className="grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_auto] items-center gap-6 text-base font-medium text-foreground marker:content-none sm:text-lg">
+                  {item.question}
+                  <span
+                    aria-hidden
+                    className="shrink-0 text-2xl font-light leading-none text-muted-foreground transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="max-w-3xl pt-3 text-base leading-7 text-muted-foreground">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="mt-16 border border-foreground bg-foreground px-5 py-8 text-background sm:mt-24 lg:flex lg:items-center lg:justify-between lg:gap-12 sm:px-8 sm:py-12">
         <div className="max-w-md">

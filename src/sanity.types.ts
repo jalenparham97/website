@@ -99,6 +99,7 @@ export type ServicesPage = {
   packages?: {
     headline?: string;
     description?: string;
+    note?: string;
     ctaLabel?: string;
     items?: Array<{
       name?: string;
@@ -106,6 +107,15 @@ export type ServicesPage = {
       blurb?: string;
       features?: Array<string>;
       featured?: boolean;
+      _key: string;
+    }>;
+  };
+  faq?: {
+    headline?: string;
+    description?: string;
+    items?: Array<{
+      question?: string;
+      answer?: string;
       _key: string;
     }>;
   };
@@ -587,13 +597,14 @@ export type WORK_PAGE_QUERY_RESULT =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SERVICES_PAGE_QUERY
-// Query: *[_id == "servicesPage"][0]{    title,    intro{ headline, description, packagesLabel, cta{ label, href } },    offer{ headline, description, items[]{ _key, title, description, icon } },    packages{ headline, description, ctaLabel, items[]{ _key, name, price, blurb, features, featured } },    finalCta{ headline, description, link{ label, href } },    seo{      title,      description,      image,      noIndex    }  }
+// Query: *[_id == "servicesPage"][0]{    title,    intro{ headline, description, packagesLabel, cta{ label, href } },    offer{ headline, description, items[]{ _key, title, description, icon } },    packages{ headline, description, note, ctaLabel, items[]{ _key, name, price, blurb, features, featured } },    faq{ headline, description, items[]{ _key, question, answer } },    finalCta{ headline, description, link{ label, href } },    seo{      title,      description,      image,      noIndex    }  }
 export type SERVICES_PAGE_QUERY_RESULT =
   | {
       title: string | null;
       intro: null;
       offer: null;
       packages: null;
+      faq: null;
       finalCta: null;
       seo: null;
     }
@@ -602,6 +613,7 @@ export type SERVICES_PAGE_QUERY_RESULT =
       intro: null;
       offer: null;
       packages: null;
+      faq: null;
       finalCta: null;
       seo: {
         title: string | null;
@@ -626,6 +638,7 @@ export type SERVICES_PAGE_QUERY_RESULT =
       } | null;
       offer: null;
       packages: null;
+      faq: null;
       finalCta: null;
       seo: {
         title: string | null;
@@ -664,6 +677,7 @@ export type SERVICES_PAGE_QUERY_RESULT =
       packages: {
         headline: string | null;
         description: string | null;
+        note: string | null;
         ctaLabel: string | null;
         items: Array<{
           _key: string;
@@ -672,6 +686,15 @@ export type SERVICES_PAGE_QUERY_RESULT =
           blurb: string | null;
           features: Array<string> | null;
           featured: boolean | null;
+        }> | null;
+      } | null;
+      faq: {
+        headline: string | null;
+        description: string | null;
+        items: Array<{
+          _key: string;
+          question: string | null;
+          answer: string | null;
         }> | null;
       } | null;
       finalCta: {
@@ -909,7 +932,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_id == "contactPage"][0]{\n    title,\n    intro{ headline, description },\n    emailSection{ headline, description, email },\n    formSection{ headline, description },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': CONTACT_PAGE_QUERY_RESULT;
     '\n  *[_id == "workPage"][0]{\n    title,\n    intro{ headline, description },\n    featuredProjects[]->{ _id, title, description, "href": link, "image": image.asset->url, tags },\n    cta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': WORK_PAGE_QUERY_RESULT;
-    '\n  *[_id == "servicesPage"][0]{\n    title,\n    intro{ headline, description, packagesLabel, cta{ label, href } },\n    offer{ headline, description, items[]{ _key, title, description, icon } },\n    packages{ headline, description, ctaLabel, items[]{ _key, name, price, blurb, features, featured } },\n    finalCta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': SERVICES_PAGE_QUERY_RESULT;
+    '\n  *[_id == "servicesPage"][0]{\n    title,\n    intro{ headline, description, packagesLabel, cta{ label, href } },\n    offer{ headline, description, items[]{ _key, title, description, icon } },\n    packages{ headline, description, note, ctaLabel, items[]{ _key, name, price, blurb, features, featured } },\n    faq{ headline, description, items[]{ _key, question, answer } },\n    finalCta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': SERVICES_PAGE_QUERY_RESULT;
     '\n  *[_id == "aboutPage"][0]{\n    title,\n    story{\n      headline,\n      body\n    },\n    cta{\n      headline,\n      intro,\n      link{ label, href }\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_id == "homePage"][0]{\n    title,\n    hero{\n      headline,\n      intro,\n      primaryCta{ label, href },\n      secondaryCta{ label, href }\n    },\n    about{\n      headline,\n      body,\n      cta{ label, href },\n      principles[]{\n        _key,\n        title,\n        summary,\n        description\n      }\n    },\n    services{\n      headline,\n      intro,\n      items[]{\n        _key,\n        title,\n        summary,\n        detail,\n        tags\n      }\n    },\n    portfolio{\n      headline,\n      intro,\n      cta{ label, href },\n      featuredProjects[]->{\n        _id,\n        title,\n        description,\n        "href": link,\n        "image": image.asset->url,\n        tags\n      }\n    },\n    contact{\n      headline,\n      intro,\n      email\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
   }

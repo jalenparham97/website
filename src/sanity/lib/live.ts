@@ -1,3 +1,4 @@
+import { cacheTag } from "next/cache";
 import { cookies, draftMode } from "next/headers";
 import {
   defineLive,
@@ -41,12 +42,15 @@ export async function sanityFetchMetadata<const QueryString extends string>({
   query,
   perspective,
   variant,
+  tag,
 }: {
   query: QueryString;
   perspective: LivePerspective;
   variant?: string;
+  tag: string;
 }) {
   "use cache";
+  cacheTag(tag);
 
   return sanityFetch({ query, perspective, variant, stega: false });
 }

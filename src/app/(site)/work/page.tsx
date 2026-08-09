@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { cacheTag } from "next/cache";
 import { draftMode } from "next/headers";
 import { Suspense } from "react";
 import { WorkPage } from "@/components/pages/work/work-page";
+import { sanityTags } from "@/sanity/lib/cache-tags";
 import {
   getDynamicFetchOptions,
   sanityFetch,
@@ -16,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     query: WORK_PAGE_QUERY,
     perspective,
     variant,
+    tag: sanityTags.work,
   });
 
   return {
@@ -47,6 +50,7 @@ async function DynamicWorkRoute() {
 
 async function CachedWorkRoute({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
+  cacheTag(sanityTags.work);
   const { data } = await sanityFetch({
     query: WORK_PAGE_QUERY,
     perspective,

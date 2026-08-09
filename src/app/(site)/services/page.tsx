@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { cacheTag } from "next/cache";
 import { draftMode } from "next/headers";
 import { Suspense } from "react";
 import { ServicesPage } from "@/components/pages/services/services-page";
+import { sanityTags } from "@/sanity/lib/cache-tags";
 import {
   getDynamicFetchOptions,
   sanityFetch,
@@ -16,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     query: SERVICES_PAGE_QUERY,
     perspective,
     variant,
+    tag: sanityTags.services,
   });
 
   return {
@@ -47,6 +50,7 @@ async function DynamicServicesRoute() {
 
 async function CachedServicesRoute({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
+  cacheTag(sanityTags.services);
   const { data } = await sanityFetch({
     query: SERVICES_PAGE_QUERY,
     perspective,

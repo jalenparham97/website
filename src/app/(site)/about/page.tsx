@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { cacheTag } from "next/cache";
 import { draftMode } from "next/headers";
 import { Suspense } from "react";
 import { AboutStory } from "@/components/pages/about/about-story";
+import { sanityTags } from "@/sanity/lib/cache-tags";
 import {
   getDynamicFetchOptions,
   sanityFetch,
@@ -16,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     query: ABOUT_PAGE_QUERY,
     perspective,
     variant,
+    tag: sanityTags.about,
   });
 
   return {
@@ -47,6 +50,7 @@ async function DynamicAboutPage() {
 
 async function CachedAboutPage({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
+  cacheTag(sanityTags.about);
   const { data } = await sanityFetch({
     query: ABOUT_PAGE_QUERY,
     perspective,

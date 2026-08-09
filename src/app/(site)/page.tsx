@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cacheTag } from "next/cache";
 import { draftMode } from "next/headers";
 import { Suspense } from "react";
 import { AboutSection } from "@/components/about-section";
@@ -6,6 +7,7 @@ import { ContactSection } from "@/components/contact-section";
 import { HeroSection } from "@/components/hero-section";
 import { PortfolioSection } from "@/components/portfolio-section";
 import { ServicesSection } from "@/components/services-section";
+import { sanityTags } from "@/sanity/lib/cache-tags";
 import {
   getDynamicFetchOptions,
   sanityFetch,
@@ -20,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     query: HOME_PAGE_QUERY,
     perspective,
     variant,
+    tag: sanityTags.home,
   });
 
   return {
@@ -51,6 +54,7 @@ async function DynamicHome() {
 
 async function CachedHome({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
+  cacheTag(sanityTags.home);
   const { data } = await sanityFetch({
     query: HOME_PAGE_QUERY,
     perspective,

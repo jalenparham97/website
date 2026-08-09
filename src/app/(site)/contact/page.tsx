@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { cacheTag } from "next/cache";
 import { draftMode } from "next/headers";
 import { Suspense } from "react";
 import { ContactPage } from "@/components/pages/contact/contact-page";
+import { sanityTags } from "@/sanity/lib/cache-tags";
 import {
   getDynamicFetchOptions,
   sanityFetch,
@@ -16,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     query: CONTACT_PAGE_QUERY,
     perspective,
     variant,
+    tag: sanityTags.contact,
   });
 
   return {
@@ -47,6 +50,7 @@ async function DynamicContactRoute() {
 
 async function CachedContactRoute({ perspective, variant, stega }: DynamicFetchOptions) {
   "use cache";
+  cacheTag(sanityTags.contact);
   const { data } = await sanityFetch({
     query: CONTACT_PAGE_QUERY,
     perspective,

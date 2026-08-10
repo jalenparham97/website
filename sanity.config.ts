@@ -1,6 +1,5 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { visionTool } from "@sanity/vision";
 import { presentationTool } from "sanity/presentation";
 import { resolve } from "./src/sanity/presentation/resolve";
 import { documentActions } from "./src/sanity/document-actions";
@@ -14,6 +13,14 @@ import { link } from "./src/sanity/schema-types/objects/link";
 import { seo } from "./src/sanity/schema-types/objects/seo";
 import { structure } from "./src/sanity/structure";
 
+const singletonTypes = new Set([
+  "aboutPage",
+  "contactPage",
+  "homePage",
+  "servicesPage",
+  "workPage",
+]);
+
 export default defineConfig({
   name: "default",
   title: "Personal Website",
@@ -24,7 +31,6 @@ export default defineConfig({
 
   plugins: [
     structureTool({ structure }),
-    visionTool(),
     presentationTool({
       resolve,
       previewUrl: {
@@ -38,6 +44,8 @@ export default defineConfig({
 
   document: {
     actions: documentActions,
+    newDocumentOptions: (previousTemplates) =>
+      previousTemplates.filter((template) => !singletonTypes.has(template.templateId)),
   },
 
   schema: {

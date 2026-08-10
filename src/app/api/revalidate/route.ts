@@ -1,6 +1,7 @@
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { sanityTags } from "@/sanity/lib/cache-tags";
+import { env } from "@/env";
 
 const tagsByDocumentType: Record<string, readonly string[]> = {
   homePage: [sanityTags.home],
@@ -12,9 +13,7 @@ const tagsByDocumentType: Record<string, readonly string[]> = {
 };
 
 export async function POST(request: Request) {
-  const secret = process.env.SANITY_REVALIDATE_SECRET;
-
-  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) {
+  if (request.headers.get("authorization") !== `Bearer ${env.SANITY_REVALIDATE_SECRET}`) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 

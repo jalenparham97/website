@@ -76,7 +76,7 @@ export function ContactSection({ content }: { content: ContactContent }) {
         </div>
 
         <div className="border border-border bg-card p-6 sm:p-10 lg:p-12">
-          <ContactForm email={email} />
+          <ContactForm />
         </div>
       </div>
     </section>

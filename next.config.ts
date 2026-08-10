@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { sanity } from "next-sanity/live/cache-life";
+import "./src/env";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,

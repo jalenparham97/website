@@ -108,7 +108,7 @@ export function ContactPage({ data }: { data: SanityData<CONTACT_PAGE_QUERY_RESU
           </p>
 
           <div className="mt-6 border-t border-border pt-6 sm:mt-8 sm:pt-8">
-            <ContactForm email={email} />
+            <ContactForm />
           </div>
         </section>
       </div>

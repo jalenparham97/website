@@ -6,24 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { env } from "@/env";
 
-export function ContactForm({ email: contactEmail }: { email: string }) {
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const name = String(formData.get("name") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
-
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-
-    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-    event.currentTarget.reset();
-  }
-
+export function ContactForm() {
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <form
+      action={`https://api.formbox.app/s/${env.NEXT_PUBLIC_FORMBOX_FORM_ID}`}
+      method="POST"
+      className="w-full"
+    >
       <FieldGroup className="gap-5">
         <Field>
           <FieldLabel htmlFor="name">Name</FieldLabel>

@@ -5,6 +5,8 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import type { ABOUT_PAGE_QUERY_RESULT } from "@/sanity.types";
 import { PortableText } from "@/sanity/lib/portable-text";
 import type { SanityData } from "@/sanity/lib/types";
+import { AboutPersonalSections } from "./about-personal-sections";
+import { TechSection } from "./tech-section";
 
 export function AboutStory({ data }: { data: SanityData<ABOUT_PAGE_QUERY_RESULT> }) {
   const story = data.story;
@@ -23,6 +25,13 @@ export function AboutStory({ data }: { data: SanityData<ABOUT_PAGE_QUERY_RESULT>
           </div>
         )}
       </header>
+
+      {data.tech?.items?.length ? <TechSection content={data.tech} /> : null}
+
+      <AboutPersonalSections
+        exploring={data.currentlyExploring}
+        currentlyPlaying={data.currentlyPlaying}
+      />
 
       <footer className="mx-auto mt-20 max-w-3xl border-t border-border pt-10 sm:mt-24 sm:flex sm:items-end sm:justify-between sm:gap-12 sm:pt-12">
         <div className="max-w-xl">

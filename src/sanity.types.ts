@@ -275,6 +275,37 @@ export type AboutPage = {
       _key: string;
     }>;
   };
+  tech?: {
+    headline?: string;
+    intro?: string;
+    items?: Array<{
+      name?: string;
+      category?: "development" | "hardware" | "apps" | "ai" | "gaming";
+      description?: string;
+      url?: string;
+      _key: string;
+    }>;
+  };
+  currentlyExploring?: {
+    headline?: string;
+    intro?: string;
+    items?: Array<{
+      name?: string;
+      description?: string;
+      url?: string;
+      _key: string;
+    }>;
+  };
+  currentlyPlaying?: {
+    headline?: string;
+    intro?: string;
+    items?: Array<{
+      name?: string;
+      description?: string;
+      url?: string;
+      _key: string;
+    }>;
+  };
   cta?: {
     headline?: string;
     intro?: string;
@@ -722,17 +753,23 @@ export type SERVICES_PAGE_QUERY_RESULT =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ABOUT_PAGE_QUERY
-// Query: *[_id == "aboutPage"][0]{    title,    story{      headline,      body    },    cta{      headline,      intro,      link{ label, href }    },    seo{      title,      description,      image,      noIndex    }  }
+// Query: *[_id == "aboutPage"][0]{    title,    story{      headline,      body    },    tech{      headline,      intro,      items[]{ _key, name, category, description, url }    },    currentlyExploring{      headline,      intro,      items[]{ _key, name, description, url }    },    currentlyPlaying{      headline,      intro,      items[]{ _key, name, description, url }    },    cta{      headline,      intro,      link{ label, href }    },    seo{      title,      description,      image,      noIndex    }  }
 export type ABOUT_PAGE_QUERY_RESULT =
   | {
       title: string | null;
       story: null;
+      tech: null;
+      currentlyExploring: null;
+      currentlyPlaying: null;
       cta: null;
       seo: null;
     }
   | {
       title: string | null;
       story: null;
+      tech: null;
+      currentlyExploring: null;
+      currentlyPlaying: null;
       cta: null;
       seo: {
         title: string | null;
@@ -750,6 +787,9 @@ export type ABOUT_PAGE_QUERY_RESULT =
   | {
       title: string | null;
       story: null;
+      tech: null;
+      currentlyExploring: null;
+      currentlyPlaying: null;
       cta: {
         headline: string | null;
         intro: null;
@@ -793,6 +833,38 @@ export type ABOUT_PAGE_QUERY_RESULT =
           level?: number;
           _type: "block";
           _key: string;
+        }> | null;
+      } | null;
+      tech: {
+        headline: string | null;
+        intro: string | null;
+        items: Array<{
+          _key: string;
+          name: string | null;
+          category:
+            "ai" | "apps" | "development" | "gaming" | "hardware" | null;
+          description: string | null;
+          url: string | null;
+        }> | null;
+      } | null;
+      currentlyExploring: {
+        headline: string | null;
+        intro: string | null;
+        items: Array<{
+          _key: string;
+          name: string | null;
+          description: string | null;
+          url: string | null;
+        }> | null;
+      } | null;
+      currentlyPlaying: {
+        headline: string | null;
+        intro: string | null;
+        items: Array<{
+          _key: string;
+          name: string | null;
+          description: string | null;
+          url: string | null;
         }> | null;
       } | null;
       cta: {
@@ -933,7 +1005,7 @@ declare module "@sanity/client" {
     '\n  *[_id == "contactPage"][0]{\n    title,\n    intro{ headline, description },\n    emailSection{ headline, description, email },\n    formSection{ headline, description },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': CONTACT_PAGE_QUERY_RESULT;
     '\n  *[_id == "workPage"][0]{\n    title,\n    intro{ headline, description },\n    featuredProjects[]->{ _id, title, description, "href": link, "image": image.asset->url, tags },\n    cta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': WORK_PAGE_QUERY_RESULT;
     '\n  *[_id == "servicesPage"][0]{\n    title,\n    intro{ headline, description, packagesLabel, cta{ label, href } },\n    offer{ headline, description, items[]{ _key, title, description, icon } },\n    packages{ headline, description, note, ctaLabel, items[]{ _key, name, price, blurb, features, featured } },\n    faq{ headline, description, items[]{ _key, question, answer } },\n    finalCta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': SERVICES_PAGE_QUERY_RESULT;
-    '\n  *[_id == "aboutPage"][0]{\n    title,\n    story{\n      headline,\n      body\n    },\n    cta{\n      headline,\n      intro,\n      link{ label, href }\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
+    '\n  *[_id == "aboutPage"][0]{\n    title,\n    story{\n      headline,\n      body\n    },\n    tech{\n      headline,\n      intro,\n      items[]{ _key, name, category, description, url }\n    },\n    currentlyExploring{\n      headline,\n      intro,\n      items[]{ _key, name, description, url }\n    },\n    currentlyPlaying{\n      headline,\n      intro,\n      items[]{ _key, name, description, url }\n    },\n    cta{\n      headline,\n      intro,\n      link{ label, href }\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_id == "homePage"][0]{\n    title,\n    hero{\n      headline,\n      intro,\n      primaryCta{ label, href },\n      secondaryCta{ label, href }\n    },\n    about{\n      headline,\n      body,\n      cta{ label, href },\n      principles[]{\n        _key,\n        title,\n        summary,\n        description\n      }\n    },\n    services{\n      headline,\n      intro,\n      items[]{\n        _key,\n        title,\n        summary,\n        detail,\n        tags\n      }\n    },\n    portfolio{\n      headline,\n      intro,\n      cta{ label, href },\n      featuredProjects[]->{\n        _id,\n        title,\n        description,\n        "href": link,\n        "image": image.asset->url,\n        tags\n      }\n    },\n    contact{\n      headline,\n      intro,\n      email\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
   }
 }

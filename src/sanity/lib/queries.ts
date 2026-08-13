@@ -54,6 +54,21 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
       headline,
       body
     },
+    tech{
+      headline,
+      intro,
+      items[]{ _key, name, category, description, url }
+    },
+    currentlyExploring{
+      headline,
+      intro,
+      items[]{ _key, name, description, url }
+    },
+    currentlyPlaying{
+      headline,
+      intro,
+      items[]{ _key, name, description, url }
+    },
     cta{
       headline,
       intro,

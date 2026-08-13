@@ -16,10 +16,16 @@
   --typeset-font-body: var(--font-geist);
   --typeset-font-heading: var(--font-geist);
   --typeset-font-mono: var(--font-geist-mono);
-  --typeset-size: 1.35rem;
+  --typeset-size: 1.125rem;
   --typeset-leading: 1.85;
   --typeset-flow: 1em;
   color: var(--color-muted-foreground);
+}
+
+@media (min-width: 48rem) {
+  .typeset-story {
+    --typeset-size: 1.25rem;
+  }
 }
 
 .dark .typeset-story {

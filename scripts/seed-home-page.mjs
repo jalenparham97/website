@@ -116,10 +116,10 @@ const homePage = await client.createOrReplace({
         summary:
           'Clear layouts and a distinct visual direction built around the way your business should feel.',
         tags: [
-          'Visual Direction',
-          'Page Layouts',
-          'Mobile Friendly',
-          'Content Planning',
+          'UI Design',
+          'Visual Identity',
+          'Responsive Layouts',
+          'Information Architecture',
         ],
         detail:
           'I shape a distinct look for your business and make sure every page feels easy to follow. The result is a website that feels polished, trustworthy, and true to you.',
@@ -130,10 +130,10 @@ const homePage = await client.createOrReplace({
         summary:
           'A smooth, reliable website that helps people find what they need and take the next step.',
         tags: [
-          'Custom Website',
-          'Easy to Use',
-          'Fast Loading',
-          'Accessible Design',
+          'Custom Frontend',
+          'Performance',
+          'Accessibility',
+          'Interactive UI',
         ],
         detail:
           'I bring the finished design to life with care for the details people notice most. Your visitors get a clear, comfortable experience from their first visit to their final click.',
@@ -144,10 +144,10 @@ const homePage = await client.createOrReplace({
         summary:
           'Simple ways to keep your website current as your business grows and changes.',
         tags: [
-          'Easy Updates',
-          'Content Planning',
-          'Team Guidance',
-          'Ongoing Care',
+          'Headless CMS',
+          'Editable Pages',
+          'Structured Content',
+          'Self-Serve Updates',
         ],
         detail:
           'A great website stays useful long after launch day. I give you a straightforward way to update your content without waiting on a developer or worrying about the layout.',

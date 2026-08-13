@@ -52,7 +52,7 @@ export function ContactPage({ data }: { data: SanityData<CONTACT_PAGE_QUERY_RESU
             {data.emailSection?.description}
           </p>
 
-          <div className="border-t border-border pt-6 sm:mt-8">
+          <div className="mt-6 border-t border-border pt-6 sm:mt-8">
             <a
               href={`mailto:${email}`}
               className="text-base font-medium text-foreground transition-opacity hover:opacity-75 sm:text-lg"

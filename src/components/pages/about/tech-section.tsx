@@ -58,7 +58,7 @@ export function TechSection({ content }: { content: TechContent }) {
               aria-pressed={isActive}
               disabled={!hasItems}
               onClick={() => setActiveCategory(category.value)}
-              className={`min-h-9 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-10 sm:px-4 sm:py-2 ${
+              className={`min-h-9 rounded-none border px-3.5 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-10 sm:px-4 sm:py-2 ${
                 isActive
                   ? "border-foreground bg-foreground text-background"
                   : "border-border bg-background text-muted-foreground hover:border-foreground/30 hover:text-foreground"

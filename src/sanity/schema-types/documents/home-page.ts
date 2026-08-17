@@ -131,6 +131,11 @@ export const homePage = defineType({
           rows: 3,
         }),
         defineField({
+          name: "cta",
+          title: "Call to action",
+          type: "link",
+        }),
+        defineField({
           name: "items",
           title: "Service items",
           type: "array",

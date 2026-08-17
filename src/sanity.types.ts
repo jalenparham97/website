@@ -197,6 +197,7 @@ export type HomePage = {
   services?: {
     headline?: string;
     intro?: string;
+    cta?: Link;
     items?: Array<{
       title?: string;
       summary?: string;
@@ -892,7 +893,7 @@ export type ABOUT_PAGE_QUERY_RESULT =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "homePage"][0]{    title,    hero{      headline,      intro,      primaryCta{ label, href },      secondaryCta{ label, href }    },    about{      headline,      body,      cta{ label, href },      principles[]{        _key,        title,        summary,        description      }    },    services{      headline,      intro,      items[]{        _key,        title,        summary,        detail,        tags      }    },    portfolio{      headline,      intro,      cta{ label, href },      featuredProjects[]->{        _id,        title,        description,        "href": link,        "image": image.asset->url,        tags      }    },    contact{      headline,      intro,      email    },    seo{      title,      description,      image,      noIndex    }  }
+// Query: *[_id == "homePage"][0]{    title,    hero{      headline,      intro,      primaryCta{ label, href },      secondaryCta{ label, href }    },    about{      headline,      body,      cta{ label, href },      principles[]{        _key,        title,        summary,        description      }    },    services{      headline,      intro,      cta{ label, href },      items[]{        _key,        title,        summary,        detail,        tags      }    },    portfolio{      headline,      intro,      cta{ label, href },      featuredProjects[]->{        _id,        title,        description,        "href": link,        "image": image.asset->url,        tags      }    },    contact{      headline,      intro,      email    },    seo{      title,      description,      image,      noIndex    }  }
 export type HOME_PAGE_QUERY_RESULT =
   | {
       title: string | null;
@@ -954,6 +955,10 @@ export type HOME_PAGE_QUERY_RESULT =
       services: {
         headline: string | null;
         intro: string | null;
+        cta: {
+          label: string | null;
+          href: string | null;
+        } | null;
         items: Array<{
           _key: string;
           title: string | null;
@@ -1006,6 +1011,6 @@ declare module "@sanity/client" {
     '\n  *[_id == "workPage"][0]{\n    title,\n    intro{ headline, description },\n    featuredProjects[]->{ _id, title, description, "href": link, "image": image.asset->url, tags },\n    cta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': WORK_PAGE_QUERY_RESULT;
     '\n  *[_id == "servicesPage"][0]{\n    title,\n    intro{ headline, description, packagesLabel, cta{ label, href } },\n    offer{ headline, description, items[]{ _key, title, description, icon } },\n    packages{ headline, description, note, ctaLabel, items[]{ _key, name, price, blurb, features, featured } },\n    faq{ headline, description, items[]{ _key, question, answer } },\n    finalCta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': SERVICES_PAGE_QUERY_RESULT;
     '\n  *[_id == "aboutPage"][0]{\n    title,\n    story{\n      headline,\n      body\n    },\n    tech{\n      headline,\n      intro,\n      items[]{ _key, name, category, description, url }\n    },\n    currentlyExploring{\n      headline,\n      intro,\n      items[]{ _key, name, description, url }\n    },\n    currentlyPlaying{\n      headline,\n      intro,\n      items[]{ _key, name, description, url }\n    },\n    cta{\n      headline,\n      intro,\n      link{ label, href }\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
-    '\n  *[_id == "homePage"][0]{\n    title,\n    hero{\n      headline,\n      intro,\n      primaryCta{ label, href },\n      secondaryCta{ label, href }\n    },\n    about{\n      headline,\n      body,\n      cta{ label, href },\n      principles[]{\n        _key,\n        title,\n        summary,\n        description\n      }\n    },\n    services{\n      headline,\n      intro,\n      items[]{\n        _key,\n        title,\n        summary,\n        detail,\n        tags\n      }\n    },\n    portfolio{\n      headline,\n      intro,\n      cta{ label, href },\n      featuredProjects[]->{\n        _id,\n        title,\n        description,\n        "href": link,\n        "image": image.asset->url,\n        tags\n      }\n    },\n    contact{\n      headline,\n      intro,\n      email\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
+    '\n  *[_id == "homePage"][0]{\n    title,\n    hero{\n      headline,\n      intro,\n      primaryCta{ label, href },\n      secondaryCta{ label, href }\n    },\n    about{\n      headline,\n      body,\n      cta{ label, href },\n      principles[]{\n        _key,\n        title,\n        summary,\n        description\n      }\n    },\n    services{\n      headline,\n      intro,\n      cta{ label, href },\n      items[]{\n        _key,\n        title,\n        summary,\n        detail,\n        tags\n      }\n    },\n    portfolio{\n      headline,\n      intro,\n      cta{ label, href },\n      featuredProjects[]->{\n        _id,\n        title,\n        description,\n        "href": link,\n        "image": image.asset->url,\n        tags\n      }\n    },\n    contact{\n      headline,\n      intro,\n      email\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
   }
 }

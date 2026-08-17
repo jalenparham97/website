@@ -106,6 +106,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
     services{
       headline,
       intro,
+      cta{ label, href },
       items[]{
         _key,
         title,

@@ -83,6 +83,47 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
   }
 `);
 
+export const BLOG_PAGE_QUERY = defineQuery(`
+  {
+    "page": *[_id == "blogPage"][0]{
+      title,
+      intro{ headline, description },
+      seo{
+        title,
+        description,
+        image,
+        noIndex
+      }
+    },
+    "posts": *[_type == "blogPost" && defined(slug.current)] | order(publishedAt desc){
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      tags
+    }
+  }
+`);
+
+export const BLOG_POST_QUERY = defineQuery(`
+  *[_type == "blogPost" && slug.current == $slug][0]{
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt,
+    tags,
+    body,
+    seo{
+      title,
+      description,
+      image,
+      noIndex
+    }
+  }
+`);
+
 export const HOME_PAGE_QUERY = defineQuery(`
   *[_id == "homePage"][0]{
     title,

@@ -248,6 +248,59 @@ export type ContactPage = {
   seo?: Seo;
 };
 
+export type BlogPost = {
+  _id: string;
+  _type: "blogPost";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  excerpt?: string;
+  publishedAt?: string;
+  tags?: Array<string>;
+  coverImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  seo?: Seo;
+};
+
+export type BlogPage = {
+  _id: string;
+  _type: "blogPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  intro?: {
+    headline?: string;
+    description?: string;
+  };
+  seo?: Seo;
+};
+
 export type AboutPage = {
   _id: string;
   _type: "aboutPage";
@@ -425,6 +478,8 @@ export type AllSanitySchemaTypes =
   | Slug
   | HomePage
   | ContactPage
+  | BlogPost
+  | BlogPage
   | AboutPage
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -892,6 +947,104 @@ export type ABOUT_PAGE_QUERY_RESULT =
   | null;
 
 // Source: src/sanity/lib/queries.ts
+// Variable: BLOG_PAGE_QUERY
+// Query: {    "page": *[_id == "blogPage"][0]{      title,      intro{ headline, description },      seo{        title,        description,        image,        noIndex      }    },    "posts": *[_type == "blogPost" && defined(slug.current)] | order(publishedAt desc){      _id,      title,      slug,      excerpt,      publishedAt,      tags    }  }
+export type BLOG_PAGE_QUERY_RESULT = {
+  page:
+    | {
+        title: string | null;
+        intro: null;
+        seo: null;
+      }
+    | {
+        title: string | null;
+        intro: null;
+        seo: {
+          title: string | null;
+          description: string | null;
+          image: {
+            asset?: SanityImageAssetReference;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          noIndex: boolean | null;
+        } | null;
+      }
+    | {
+        title: string | null;
+        intro: {
+          headline: string | null;
+          description: string | null;
+        } | null;
+        seo: {
+          title: string | null;
+          description: string | null;
+          image: {
+            asset?: SanityImageAssetReference;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          noIndex: boolean | null;
+        } | null;
+      }
+    | null;
+  posts: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+    excerpt: string | null;
+    publishedAt: string | null;
+    tags: Array<string> | null;
+  }>;
+};
+
+// Source: src/sanity/lib/queries.ts
+// Variable: BLOG_POST_QUERY
+// Query: *[_type == "blogPost" && slug.current == $slug][0]{    _id,    title,    slug,    excerpt,    publishedAt,    tags,    body,    seo{      title,      description,      image,      noIndex    }  }
+export type BLOG_POST_QUERY_RESULT = {
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  excerpt: string | null;
+  publishedAt: string | null;
+  tags: Array<string> | null;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | null;
+  } | null;
+} | null;
+
+// Source: src/sanity/lib/queries.ts
 // Variable: HOME_PAGE_QUERY
 // Query: *[_id == "homePage"][0]{    title,    hero{      headline,      intro,      primaryCta{ label, href },      secondaryCta{ label, href }    },    about{      headline,      body,      cta{ label, href },      principles[]{        _key,        title,        summary,        description      }    },    services{      headline,      intro,      cta{ label, href },      items[]{        _key,        title,        summary,        detail,        tags      }    },    portfolio{      headline,      intro,      cta{ label, href },      featuredProjects[]->{        _id,        title,        description,        "href": link,        "image": image.asset->url,        tags      }    },    contact{      headline,      intro,      email    },    seo{      title,      description,      image,      noIndex    }  }
 export type HOME_PAGE_QUERY_RESULT =
@@ -1011,6 +1164,8 @@ declare module "@sanity/client" {
     '\n  *[_id == "workPage"][0]{\n    title,\n    intro{ headline, description },\n    featuredProjects[]->{ _id, title, description, "href": link, "image": image.asset->url, tags },\n    cta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': WORK_PAGE_QUERY_RESULT;
     '\n  *[_id == "servicesPage"][0]{\n    title,\n    intro{ headline, description, packagesLabel, cta{ label, href } },\n    offer{ headline, description, items[]{ _key, title, description, icon } },\n    packages{ headline, description, note, ctaLabel, items[]{ _key, name, price, blurb, features, featured } },\n    faq{ headline, description, items[]{ _key, question, answer } },\n    finalCta{ headline, description, link{ label, href } },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': SERVICES_PAGE_QUERY_RESULT;
     '\n  *[_id == "aboutPage"][0]{\n    title,\n    story{\n      headline,\n      body\n    },\n    tech{\n      headline,\n      intro,\n      items[]{ _key, name, category, description, url }\n    },\n    currentlyExploring{\n      headline,\n      intro,\n      items[]{ _key, name, description, url }\n    },\n    currentlyPlaying{\n      headline,\n      intro,\n      items[]{ _key, name, description, url }\n    },\n    cta{\n      headline,\n      intro,\n      link{ label, href }\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': ABOUT_PAGE_QUERY_RESULT;
+    '\n  {\n    "page": *[_id == "blogPage"][0]{\n      title,\n      intro{ headline, description },\n      seo{\n        title,\n        description,\n        image,\n        noIndex\n      }\n    },\n    "posts": *[_type == "blogPost" && defined(slug.current)] | order(publishedAt desc){\n      _id,\n      title,\n      slug,\n      excerpt,\n      publishedAt,\n      tags\n    }\n  }\n': BLOG_PAGE_QUERY_RESULT;
+    '\n  *[_type == "blogPost" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    excerpt,\n    publishedAt,\n    tags,\n    body,\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': BLOG_POST_QUERY_RESULT;
     '\n  *[_id == "homePage"][0]{\n    title,\n    hero{\n      headline,\n      intro,\n      primaryCta{ label, href },\n      secondaryCta{ label, href }\n    },\n    about{\n      headline,\n      body,\n      cta{ label, href },\n      principles[]{\n        _key,\n        title,\n        summary,\n        description\n      }\n    },\n    services{\n      headline,\n      intro,\n      cta{ label, href },\n      items[]{\n        _key,\n        title,\n        summary,\n        detail,\n        tags\n      }\n    },\n    portfolio{\n      headline,\n      intro,\n      cta{ label, href },\n      featuredProjects[]->{\n        _id,\n        title,\n        description,\n        "href": link,\n        "image": image.asset->url,\n        tags\n      }\n    },\n    contact{\n      headline,\n      intro,\n      email\n    },\n    seo{\n      title,\n      description,\n      image,\n      noIndex\n    }\n  }\n': HOME_PAGE_QUERY_RESULT;
   }
 }

@@ -61,6 +61,23 @@ export const resolve: PresentationPluginOptions["resolve"] = {
         ],
       }),
     }),
+    blogPage: defineLocations({
+      select: { title: "title" },
+      resolve: (doc) => ({
+        locations: [{ title: doc?.title || "Blog", href: "/blog" }],
+      }),
+    }),
+    blogPost: defineLocations({
+      select: { title: "title", slug: "slug.current" },
+      resolve: (doc) => ({
+        locations: [
+          {
+            title: doc?.title || "Article",
+            href: doc?.slug ? `/blog/${doc.slug}` : "/blog",
+          },
+        ],
+      }),
+    }),
     workPage: defineLocations({
       select: { title: "title" },
       resolve: (doc) => ({

@@ -32,6 +32,26 @@
   --typeset-leading: 1.65;
 }
 
+.typeset-article {
+  --typeset-font-body: var(--font-geist);
+  --typeset-font-heading: var(--font-geist);
+  --typeset-font-mono: var(--font-geist-mono);
+  --typeset-size: 1rem;
+  --typeset-leading: 1.75;
+  --typeset-flow: 1.1em;
+  color: var(--color-muted-foreground);
+}
+
+@media (min-width: 48rem) {
+  .typeset-article {
+    --typeset-size: 1.1875rem;
+  }
+}
+
+.dark .typeset-article {
+  --typeset-leading: 1.7;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

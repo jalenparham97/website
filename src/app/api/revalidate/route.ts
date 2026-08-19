@@ -10,6 +10,8 @@ const tagsByDocumentType: Record<string, readonly string[]> = {
   servicesPage: [sanityTags.services],
   workPage: [sanityTags.work],
   project: [sanityTags.home, sanityTags.work],
+  blogPage: [sanityTags.blog],
+  blogPost: [sanityTags.blog],
 };
 
 export async function POST(request: Request) {

@@ -39,14 +39,14 @@ const blogPage = await client.createOrReplace({
   _type: 'blogPage',
   title: 'Blog',
   intro: {
-    headline: 'Notes on making the web clearer.',
+    headline: 'Things I have been thinking about.',
     description:
-      'Thoughts on design, development, and the choices that make a website feel easy to use.',
+      'Mostly design and development. Sometimes process. Always from work I am actually doing.',
   },
   seo: {
-    title: 'Blog | Jalen Parham',
+    title: 'Blog - Jalen Parham',
     description:
-      'Notes from Jalen Parham on web design, development, and building clearer digital experiences.',
+      'Writing from Jalen Parham on design, development, and the work of making websites.',
     noIndex: false,
   },
 });

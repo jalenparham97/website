@@ -40,11 +40,13 @@ export async function getDynamicFetchOptions(): Promise<DynamicFetchOptions> {
 
 export async function sanityFetchMetadata<const QueryString extends string>({
   query,
+  params,
   perspective,
   variant,
   tag,
 }: {
   query: QueryString;
+  params?: Record<string, unknown>;
   perspective: LivePerspective;
   variant?: string;
   tag: string;
@@ -52,5 +54,5 @@ export async function sanityFetchMetadata<const QueryString extends string>({
   "use cache";
   cacheTag(tag);
 
-  return sanityFetch({ query, perspective, variant, stega: false });
+  return sanityFetch({ query, params, perspective, variant, stega: false });
 }

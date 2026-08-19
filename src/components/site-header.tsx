@@ -60,6 +60,9 @@ export function SiteHeader() {
           <Link className="transition-colors hover:text-foreground" href="/work">
             My work
           </Link>
+          <Link className="transition-colors hover:text-foreground" href="/blog">
+            Blog
+          </Link>
           <Link className="transition-colors hover:text-foreground" href="/contact">
             Contact
           </Link>
@@ -127,6 +130,13 @@ export function SiteHeader() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 My work
+              </Link>
+              <Link
+                className="border-b border-border/60 py-5 transition-colors hover:text-foreground"
+                href="/blog"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
               </Link>
               <Link
                 className="border-b border-border/60 py-5 transition-colors hover:text-foreground"

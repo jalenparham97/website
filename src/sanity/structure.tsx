@@ -10,7 +10,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import type { ComponentType } from "react";
 import type { StructureResolver } from "sanity/structure";
 
-const SINGLETONS = ["aboutPage", "contactPage", "homePage", "servicesPage", "workPage"];
+const SINGLETONS = ["aboutPage", "blogPage", "contactPage", "homePage", "servicesPage", "workPage"];
 
 function studioIcon(icon: typeof Home01Icon): ComponentType {
   function Icon() {
@@ -49,9 +49,16 @@ export const structure: StructureResolver = (S) =>
         .title("Work Page")
         .icon(studioIcon(Briefcase01Icon))
         .child(S.document().schemaType("workPage").documentId("workPage").title("Work Page")),
+      S.listItem()
+        .title("Blog Page")
+        .child(S.document().schemaType("blogPage").documentId("blogPage").title("Blog Page")),
+      S.listItem().title("Articles").child(S.documentTypeList("blogPost").title("Articles")),
       S.divider(),
       ...S.documentTypeListItems()
-        .filter((listItem) => !SINGLETONS.includes(listItem.getId() ?? ""))
+        .filter(
+          (listItem) =>
+            !SINGLETONS.includes(listItem.getId() ?? "") && listItem.getId() !== "blogPost",
+        )
         .map((listItem) =>
           listItem.getId() === "project"
             ? listItem.title("Projects").icon(studioIcon(Folder01Icon))

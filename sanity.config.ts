@@ -4,6 +4,8 @@ import { presentationTool } from "sanity/presentation";
 import { resolve } from "./src/sanity/presentation/resolve";
 import { documentActions } from "./src/sanity/document-actions";
 import { aboutPage } from "./src/sanity/schema-types/documents/about-page";
+import { blogPage } from "./src/sanity/schema-types/documents/blog-page";
+import { blogPost } from "./src/sanity/schema-types/documents/blog-post";
 import { contactPage } from "./src/sanity/schema-types/documents/contact-page";
 import { homePage } from "./src/sanity/schema-types/documents/home-page";
 import { project } from "./src/sanity/schema-types/documents/project";
@@ -19,6 +21,7 @@ const singletonTypes = new Set([
   "homePage",
   "servicesPage",
   "workPage",
+  "blogPage",
 ]);
 
 export default defineConfig({
@@ -49,6 +52,17 @@ export default defineConfig({
   },
 
   schema: {
-    types: [aboutPage, contactPage, homePage, project, servicesPage, workPage, link, seo],
+    types: [
+      aboutPage,
+      blogPage,
+      blogPost,
+      contactPage,
+      homePage,
+      project,
+      servicesPage,
+      workPage,
+      link,
+      seo,
+    ],
   },
 });
